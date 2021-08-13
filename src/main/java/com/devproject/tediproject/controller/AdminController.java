@@ -29,7 +29,7 @@ public class AdminController {
     }
 
     @PutMapping("/admins/{id}")
-    Admin replaceUser(@RequestBody Admin newAdmin, @PathVariable Long id){
+    Admin replaceAdmin(@RequestBody Admin newAdmin, @PathVariable Long id){
 
         return repository.findById(id)
                 .map(admin -> {
@@ -43,7 +43,7 @@ public class AdminController {
                 });
     }
 
-    @DeleteMapping("/user/{id}")
-    void deleteUser(@PathVariable Long id) { repository.deleteById(id); }
+    @DeleteMapping("/admins/{id}")
+    void deleteAdmin(@PathVariable Long id) { repository.deleteById(id); }
 
 }

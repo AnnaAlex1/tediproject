@@ -4,6 +4,7 @@ import com.devproject.tediproject.model.Admin;
 
 import java.util.*;
 
+
 public class AdminDao implements Dao<Admin>{
 
     private List<Admin> admins = new ArrayList<>();
