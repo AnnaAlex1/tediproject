@@ -32,7 +32,7 @@ public class JobPostingController {
                     return repository.save(jobPosting);
                 })
                 .orElseGet( () -> {
-                    newJobPosting.setText(id);
+                    newJobPosting.setIdJob_posting(id);
                     return repository.save((newJobPosting));
                 });
     }

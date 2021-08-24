@@ -3,7 +3,6 @@ package com.devproject.tediproject.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Data
 @Entity

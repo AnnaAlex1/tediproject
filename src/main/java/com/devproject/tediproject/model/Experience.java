@@ -15,7 +15,7 @@ public class Experience {
     private Date end_date;
     @Id private String company_name;
 
-    @OneToOne(cascade= CascadeType.ALL)
+    @ManyToOne(cascade= CascadeType.ALL)
     private Professional Professional_idProfessional;
 
 

@@ -1,13 +1,12 @@
 package com.devproject.tediproject.controller;
 
 import com.devproject.tediproject.model.Education;
+import com.devproject.tediproject.model.EducationId;
 import com.devproject.tediproject.repository.EducationRepository;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 public class EducationController {
@@ -21,35 +20,32 @@ public class EducationController {
     @PostMapping("/professionals/{id}/education")
     Education newExperience(@RequestBody Education newEducation, @PathVariable Long id) { return repository.save(newEducation); }
 
-    /*
+    @GetMapping("/professionals/{id}/education")
+    List<Education> get_All(@PathVariable Long id){
+        return  repository.findByProfessionalId(id);
+    }
 
+    @PutMapping("/professionals/{id}/education/{id2}")
+    Education replaceEducation(@RequestBody Education newEducation, @PathVariable Long id, @PathVariable EducationId id2){
 
-    @PostMapping("/professionals/{id}/experience")
-    Experience newExperience(@RequestBody Experience newExperience, @PathVariable Long id) { return repository.save(newExperience); }
-
-    @PostMapping("/professionals/{id}/experience")
-    List<Experience> get_All(@PathVariable Long id) { return repository.findAll(); }
-
-
-    @PutMapping("/professionals/{id}/experience/{id2}")
-    Experience replaceExperience(@RequestBody Experience newExperience, @PathVariable Long id, @PathVariable Long id2){
         return repository.findById(id2)
-                .map(experience -> {
-                    experience.setCompany_name(newExperience.getCompany_name());
-                    experience.setTitle(newExperience.getTitle());
-                    experience.setStart_date(newExperience.getStart_date());
-                    experience.setEnd_date(newExperience.getEnd_date());
-                    return repository.save(experience);
+                .map(education -> {
+                    education.setType(newEducation.getType());
+                    education.setTitle(newEducation.getTitle());
+                    education.setInstitution_name(newEducation.getInstitution_name());
+                    education.setGrade(newEducation.getGrade());
+                    education.setDate(newEducation.getDate());
+                    education.setProfessional_idProfessional(newEducation.getProfessional_idProfessional());
+                    return repository.save(education);
                 })
                 .orElseGet(() -> {
-                    newExperience.setId(id2);
-                    return repository.save(newExperience);
+//                    newExperience.setTitle(id2);
+                    return repository.save(newEducation);
                 });
     }
 
-    @DeleteMapping("/professionals/{id}/experience/{id2}")
-    void deleteExperience(@PathVariable Long id, @PathVariable Long id2) { repository.deleteById(id2);}
-     */
+    @DeleteMapping("/professionals/{id}/education/{id2}")
+    void deleteEducation(@PathVariable Long id, @PathVariable EducationId id2) { repository.deleteById(id2);}
 
 
 }

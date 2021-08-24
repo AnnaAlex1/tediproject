@@ -1,6 +1,5 @@
 package com.devproject.tediproject.controller;
 
-import com.devproject.tediproject.model.Company;
 import com.devproject.tediproject.model.Institution;
 import com.devproject.tediproject.repository.InstitutionRepository;
 import org.springframework.web.bind.annotation.*;

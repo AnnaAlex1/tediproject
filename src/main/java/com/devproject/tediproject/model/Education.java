@@ -18,7 +18,7 @@ public class Education {
     @Id private String institution_name;
 
 
-    @OneToOne(cascade= CascadeType.ALL)
+    @ManyToOne(cascade= CascadeType.ALL)
     private Professional Professional_idProfessional;
 
 
