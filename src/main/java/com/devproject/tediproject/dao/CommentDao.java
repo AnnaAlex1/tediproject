@@ -1,6 +1,7 @@
 package com.devproject.tediproject.dao;
 
 import com.devproject.tediproject.model.Comment;
+import com.devproject.tediproject.model.Post;
 import com.devproject.tediproject.model.Professional;
 
 import java.util.ArrayList;

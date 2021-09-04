@@ -3,6 +3,7 @@ package com.devproject.tediproject.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,10 +16,10 @@ public class JobPosting {
     private Professional Professional_idProfessional;
 
     @ManyToMany
-    private Collection<Picture> pictures;
+    private List<Picture> pictures;
 
     @ManyToMany
-    private Collection<Video> videos;
+    private List<Video> videos;
 
     public JobPosting() {  }
 

@@ -1,11 +1,13 @@
 package com.devproject.tediproject.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.time.format.DateTimeFormatter;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+@Data
+@Entity
 public class Post {
 
     private @GeneratedValue @Id Long idPost;
@@ -17,6 +19,14 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "Professional_idProfessional")
     private Professional prof;
+
+    @OneToMany
+    private List<Like> likes;
+
+    @OneToMany
+    private List<Comment> comments;
+
+    public Post() { }
 
     /*
     public Post(Long idPost, String text, DateTimeFormatter date_time, Long professional_idProfessional) {

@@ -1,21 +1,25 @@
 package com.devproject.tediproject.model;
 
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import lombok.Data;
+
+import javax.persistence.*;
 
 import java.util.List;
+
+@Data
+@Entity
 public class Like {
 
     @OneToOne
-    private Post post;
+    @Id private Post post;
     //private @Id Long post_idPost;
 
     @OneToMany(targetEntity = Professional.class)
     private List<Professional> professionals_liked;
     //private @Id Long professional_liked;
 
-    @OneToMany(targetEntity = Professional.class)
-    private List<Professional> professional_posted;
+    @ManyToOne(targetEntity = Professional.class)
+    private Professional professional_posted;
     //private @Id Long professional_posted;
 
     public Like(){}
@@ -36,15 +40,15 @@ public class Like {
         this.professionals_liked = professionals_liked;
     }
 
-    public List<Professional> getProfessional_posted() {
+    public Professional getProfessional_posted() {
         return professional_posted;
     }
 
-    public void setProfessional_posted(List<Professional> professional_posted) {
+    public void setProfessional_posted(Professional professional_posted) {
         this.professional_posted = professional_posted;
     }
 
-    /*
+/*
     public Like(Long professional_liked, Long post_idPost, Long professional_posted) {
         this.professional_liked = professional_liked;
         this.post_idPost = post_idPost;

@@ -14,7 +14,7 @@ public class Comment {
     @OneToOne(cascade= CascadeType.ALL)
     private Professional Professional_idProfessional;
 
-    @OneToOne(cascade= CascadeType.ALL)
+    @ManyToOne(cascade= CascadeType.ALL)
     private Professional Post_idPost;
 
     @OneToOne(cascade= CascadeType.ALL)

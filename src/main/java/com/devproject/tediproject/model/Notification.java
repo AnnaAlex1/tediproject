@@ -1,9 +1,14 @@
 package com.devproject.tediproject.model;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+@Data
+@Entity
 public class Notification {
 
     private @GeneratedValue @Id Long idNotification;
@@ -18,7 +23,7 @@ public class Notification {
     //private @Id Long Post_id_post;
 
     @OneToOne
-    private Connection_request c_request;
+    private ConnectionRequest c_request;
     //private @Id Long Connection_request_from;
     //private @Id Long Connection_request_to;
 
@@ -26,6 +31,9 @@ public class Notification {
     private Like like;
     //private @Id Long Like_professional_liked;
     //private @Id Long Like_professional_posted;
+
+
+    public Notification() { }
 
     public Notification(Long idNotification, String text) {
         this.idNotification = idNotification;

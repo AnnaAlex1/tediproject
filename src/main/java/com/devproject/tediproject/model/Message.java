@@ -1,11 +1,14 @@
 package com.devproject.tediproject.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.format.DateTimeFormatter;
 
 import java.util.Set;
 
-
+@Data
+@Entity
 public class Message {
 
     private @GeneratedValue @Id Long idMessage;
@@ -32,6 +35,8 @@ public class Message {
 
     @ManyToMany(targetEntity=Video.class)
     private Set videoSet;
+
+    public Message() { }
 
     public Message(Long idMessage, String text, DateTimeFormatter date_time, Set pics, Set videos) {
         this.idMessage = idMessage;

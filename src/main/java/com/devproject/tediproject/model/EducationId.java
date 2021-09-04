@@ -1,6 +1,8 @@
 package com.devproject.tediproject.model;
 
+
 import java.io.Serializable;
+
 
 public class EducationId implements Serializable {
 

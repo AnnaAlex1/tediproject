@@ -1,14 +1,22 @@
 package com.devproject.tediproject.model;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.Set;
 
+@Data
+@Entity
 public class Video {
 
-    private String url;
+    @Id private String url;
 
     @ManyToMany(targetEntity = Message.class)
     private Set messageSet;
+
+    public Video() { }
 
     public Video(String url, Set messageSet) {
         this.url = url;
