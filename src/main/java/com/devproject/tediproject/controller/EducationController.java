@@ -17,7 +17,7 @@ public class EducationController {
         this.repository = repository;
     }
 
-    @PostMapping("/professionals/{id}/education")
+    @PostMapping("/professionals/{id}/education/add")
     Education newExperience(@RequestBody Education newEducation, @PathVariable Long id) { return repository.save(newEducation); }
 
     @GetMapping("/professionals/{id}/education")
@@ -44,7 +44,7 @@ public class EducationController {
                 });
     }
 
-    @DeleteMapping("/professionals/{id}/education/{id2}")
+    @DeleteMapping("/professionals/{id}/education/delete/{id2}")
     void deleteEducation(@PathVariable Long id, @PathVariable EducationId id2) { repository.deleteById(id2);}
 
 

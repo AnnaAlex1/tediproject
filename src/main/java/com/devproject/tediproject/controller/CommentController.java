@@ -15,7 +15,7 @@ public class CommentController {
         this.repository = repository;
     }
 
-    @PostMapping("/comments")
+    @PostMapping("/comments/add")
     Comment newComment(@RequestBody Comment newComment) { return repository.save(newComment); }
 
     @GetMapping("/comments")
@@ -41,6 +41,6 @@ public class CommentController {
                 });
     }
 
-    @DeleteMapping("/comments/{id}")
+    @DeleteMapping("/comments/delete/{id}")
     void deleteComment(@PathVariable Long id) { repository.deleteById(id); }
 }

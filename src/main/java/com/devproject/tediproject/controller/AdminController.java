@@ -16,10 +16,10 @@ public class AdminController {
         this.repository = repository;
     }
 
-    @PostMapping("/admins")
+    @PostMapping("/admins/add")
     Admin newAdmin(@RequestBody Admin newAdmin) { return repository.save(newAdmin); }
 
-    @GetMapping("/admins")
+    @GetMapping("/admins/all")
     List<Admin> get_All() { return repository.findAll(); }
 
     @GetMapping("/admins/{id}")
@@ -28,7 +28,7 @@ public class AdminController {
                 .orElseThrow(() -> new AdminNotFoundException(id));
     }
 
-    @PutMapping("/admins/{id}")
+    @PutMapping("/admins/update/{id}")
     Admin replaceAdmin(@RequestBody Admin newAdmin, @PathVariable Long id){
 
         return repository.findById(id)
@@ -43,7 +43,7 @@ public class AdminController {
                 });
     }
 
-    @DeleteMapping("/admins/{id}")
+    @DeleteMapping("/admins/delete/{id}")
     void deleteAdmin(@PathVariable Long id) { repository.deleteById(id); }
 
 }

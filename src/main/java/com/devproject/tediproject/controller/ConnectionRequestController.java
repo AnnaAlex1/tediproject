@@ -17,7 +17,7 @@ public class ConnectionRequestController {
     }
 
 
-    @PostMapping("/connectionrequests")
+    @PostMapping("/connectionrequests/add")
     ConnectionRequest newConnectionRequest(@RequestBody ConnectionRequest newConnectionRequest) { return repository.save(newConnectionRequest); }
 
     @GetMapping("/connectionrequests")
@@ -29,7 +29,7 @@ public class ConnectionRequestController {
                 .orElseThrow(() -> new ConnectionRequestNotFoundException(id));
     }
 
-    @DeleteMapping("connectionrequests/{id}")
+    @DeleteMapping("connectionrequests/delete/{id}")
     void deleteConnectionRequest(@PathVariable Long id) { repository.deleteById(id);}
 
 }

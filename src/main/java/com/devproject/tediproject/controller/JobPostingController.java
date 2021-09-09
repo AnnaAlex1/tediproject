@@ -16,7 +16,7 @@ public class JobPostingController {
         this.repository = repository;
     }
 
-    @PostMapping("/jobpostings")
+    @PostMapping("/jobpostings/add")
     JobPosting newJobPosting(@RequestBody JobPosting newJobPosting) { return repository.save(newJobPosting); }
 
     @GetMapping("/jobpostings")
@@ -37,7 +37,7 @@ public class JobPostingController {
                 });
     }
 
-    @DeleteMapping("/jobpostings/{id}")
+    @DeleteMapping("/jobpostings/delete/{id}")
     void deleteJobPosting(@PathVariable Long id) { repository.deleteById(id);}
 
 }

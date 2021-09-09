@@ -18,7 +18,7 @@ public class ExperienceController {
         this.repository = repository;
     }
 
-    @PostMapping("/professionals/{id}/experiences")
+    @PostMapping("/professionals/{id}/experiences/add")
     Experience newExperience(@RequestBody Experience newExperience, @PathVariable Long id) {
         return repository.save(newExperience);
     }
@@ -45,7 +45,7 @@ public class ExperienceController {
                 });
     }
 
-    @DeleteMapping("/professionals/{id}/experiences/{id2}")
+    @DeleteMapping("/professionals/{id}/experiences/delete/{id2}")
     void deleteExperience(@PathVariable Long id, @PathVariable ExperienceId id2) { repository.deleteById(id2);}
 
 }
