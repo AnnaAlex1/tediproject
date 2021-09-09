@@ -2,6 +2,7 @@ package com.devproject.tediproject.dao;
 
 import com.devproject.tediproject.model.Post;
 
+import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -34,7 +35,7 @@ public class PostDao implements Dao<Post>{
     public void update(Post post, String[] params){
         post.setIdPost(requireNonNull(Long.parseLong(params[0]),"IdPost cannot be null"));
         post.setText(Objects.requireNonNull(params[1], "Password cannot be null"));
-        post.setDate_time(DateTimeFormatter.ofPattern(params[2]));
+        post.setDate_time(Timestamp.valueOf(params[2]));
         //post.setProf(params[3]);
 
         posts.add(post);

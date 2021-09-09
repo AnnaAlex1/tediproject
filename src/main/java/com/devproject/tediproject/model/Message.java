@@ -3,21 +3,15 @@ package com.devproject.tediproject.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.format.DateTimeFormatter;
 
 import java.util.Set;
+import java.sql.Timestamp;
 
 @Data
 @Entity
 public class Message {
 
     private @GeneratedValue @Id Long idMessage;
-
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //private @Id Long idprofessional1;
-
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //private @Id Long idprofessional2;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Professional_idProfessional1")
@@ -28,22 +22,21 @@ public class Message {
     private Professional prof2;
 
     private String text;
-    private DateTimeFormatter date_time;
+    private Timestamp date_time;
 
-    @ManyToMany(targetEntity=Picture.class)
-    private Set pictureSet;
-
-    @ManyToMany(targetEntity=Video.class)
-    private Set videoSet;
+    private Set<String> pictureSet;
+    private Set<String> videoSet;
 
     public Message() { }
 
-    public Message(Long idMessage, String text, DateTimeFormatter date_time, Set pics, Set videos) {
+    public Message(Long idMessage, Professional prof1, Professional prof2, String text, Timestamp date_time, Set<String> pictureSet, Set<String> videoSet) {
         this.idMessage = idMessage;
+        this.prof1 = prof1;
+        this.prof2 = prof2;
         this.text = text;
         this.date_time = date_time;
-        this.pictureSet = pics;
-        this.videoSet = videos;
+        this.pictureSet = pictureSet;
+        this.videoSet = videoSet;
     }
 
     public Long getIdMessage() {
@@ -62,11 +55,11 @@ public class Message {
         this.text = text;
     }
 
-    public DateTimeFormatter getDate_time() {
+    public Timestamp getDate_time() {
         return date_time;
     }
 
-    public void setDate_time(DateTimeFormatter date_time) {
+    public void setDate_time(Timestamp date_time) {
         this.date_time = date_time;
     }
 
@@ -101,57 +94,5 @@ public class Message {
     public void setVideoSet(Set videoSet) {
         this.videoSet = videoSet;
     }
-
-    /*
-    public Message(Long idMessage, Long idprofessional1, Long idprofessional2, String text, DateTimeFormatter date_time) {
-        this.idMessage = idMessage;
-        //this.idprofessional1 = idprofessional1;
-        //this.idprofessional2 = idprofessional2;
-        this.prof1.setId(idprofessional1);
-        this.prof2.setId(idprofessional2);
-        this.text = text;
-        this.date_time = date_time;
-    }
-
-    public Long getIdMessage() {
-        return idMessage;
-    }
-
-    public void setIdMessage(Long idMessage) {
-        this.idMessage = idMessage;
-    }
-
-    public Long getIdprofessional1() {
-        return idprofessional1;
-    }
-
-    public void setIdprofessional1(Long idprofessional1) {
-        this.idprofessional1 = idprofessional1;
-    }
-
-    public Long getIdprofessional2() {
-        return idprofessional2;
-    }
-
-    public void setIdprofessional2(Long idprofessional2) {
-        this.idprofessional2 = idprofessional2;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public DateTimeFormatter getDate_time() {
-        return date_time;
-    }
-
-    public void setDate_time(DateTimeFormatter date_time) {
-        this.date_time = date_time;
-    }
-*/
 
 }

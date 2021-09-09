@@ -2,6 +2,7 @@ package com.devproject.tediproject.dao;
 
 import com.devproject.tediproject.model.Message;
 
+import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class MessageDao implements Dao<Message> {
         //message.setIdprofessional1(requireNonNull(Long.parseLong(params[1]),"IdProfessional1 cannot be null"));
         //message.setIdprofessional2(requireNonNull(Long.parseLong(params[2]),"IdProfessional2 cannot be null"));
         message.setText(params[1]);
-        message.setDate_time(DateTimeFormatter.ofPattern(params[2]));
+        message.setDate_time(Timestamp.valueOf(params[2]));
 
         //set prof1,prof2,pic,video
 

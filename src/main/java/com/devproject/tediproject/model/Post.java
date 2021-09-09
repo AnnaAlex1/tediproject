@@ -3,6 +3,7 @@ package com.devproject.tediproject.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -12,9 +13,7 @@ public class Post {
 
     private @GeneratedValue @Id Long idPost;
     private String text;
-    private DateTimeFormatter date_time;
-
-    //private @Id Long Professional_idProfessional;
+    private Timestamp date_time;
 
     @ManyToOne
     @JoinColumn(name = "Professional_idProfessional")
@@ -28,19 +27,13 @@ public class Post {
 
     public Post() { }
 
-    /*
-    public Post(Long idPost, String text, DateTimeFormatter date_time, Long professional_idProfessional) {
+    public Post(Long idPost, String text, Timestamp date_time, Professional prof, List<Like> likes, List<Comment> comments) {
         this.idPost = idPost;
         this.text = text;
         this.date_time = date_time;
-        Professional_idProfessional = professional_idProfessional;
-    }
-    */
-
-    public Post(Long idPost, String text, DateTimeFormatter date_time) {
-        this.idPost = idPost;
-        this.text = text;
-        this.date_time = date_time;
+        this.prof = prof;
+        this.likes = likes;
+        this.comments = comments;
     }
 
     public Long getIdPost() {
@@ -59,15 +52,31 @@ public class Post {
         this.text = text;
     }
 
-    public DateTimeFormatter getDate_time() {
+    public Timestamp getDate_time() {
         return date_time;
     }
 
-    public void setDate_time(DateTimeFormatter date_time) {
+    public void setDate_time(Timestamp date_time) {
         this.date_time = date_time;
     }
 
-    /*
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+/*
     public Long getProfessional_idProfessional() {
         return Professional_idProfessional;
     }
