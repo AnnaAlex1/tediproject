@@ -3,7 +3,7 @@ package com.devproject.tediproject.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -14,7 +14,7 @@ public class Education {
     @Id private String title;
     private String type;
     private float grade;
-    private Date date;
+    private LocalDate date;
     @Id private String institution_name;
 
 
@@ -24,14 +24,7 @@ public class Education {
 
     public Education() { }
 
-    public Education(String title, String type, float grade, Date date, String institution_name, Professional professional_idProfessional) {
-        this.title = title;
-        this.type = type;
-        this.grade = grade;
-        this.date = date;
-        this.institution_name = institution_name;
-        Professional_idProfessional = professional_idProfessional;
-    }
+
 
     public String getTitle() {
         return title;
@@ -57,12 +50,21 @@ public class Education {
         this.grade = grade;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Education(String title, String type, float grade, LocalDate date, String institution_name, Professional professional_idProfessional) {
+        this.title = title;
+        this.type = type;
+        this.grade = grade;
+        this.date = date;
+        this.institution_name = institution_name;
+        Professional_idProfessional = professional_idProfessional;
     }
 
     public String getInstitution_name() {

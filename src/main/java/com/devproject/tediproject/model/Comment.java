@@ -15,7 +15,7 @@ public class Comment {
     private Professional Professional_idProfessional;
 
     @ManyToOne(cascade= CascadeType.ALL)
-    private Professional Post_idPost;
+    private Post Post_idPost;
 
     @OneToOne(cascade= CascadeType.ALL)
     private Professional Post_Professional_idProfessional;
@@ -23,7 +23,7 @@ public class Comment {
 
     public Comment(){}
 
-    public Comment(Long idComment, String text, Professional professional_idProfessional, Professional post_idPost, Professional post_Professional_idProfessional) {
+    public Comment(Long idComment, String text, Professional professional_idProfessional, Post post_idPost, Professional post_Professional_idProfessional) {
         this.idComment = idComment;
         this.text = text;
         Professional_idProfessional = professional_idProfessional;
@@ -55,11 +55,11 @@ public class Comment {
         Professional_idProfessional = professional_idProfessional;
     }
 
-    public Professional getPost_idPost() {
+    public Post getPost_idPost() {
         return Post_idPost;
     }
 
-    public void setPost_idPost(Professional post_idPost) {
+    public void setPost_idPost(Post post_idPost) {
         Post_idPost = post_idPost;
     }
 

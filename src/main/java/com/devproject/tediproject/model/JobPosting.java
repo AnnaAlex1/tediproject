@@ -15,19 +15,10 @@ public class JobPosting {
     @OneToOne(cascade= CascadeType.ALL)
     private Professional Professional_idProfessional;
 
-    @ManyToMany
-    private List<Picture> pictures;
-
-    @ManyToMany
-    private List<Video> videos;
-
-    public JobPosting() {  }
-
-    public JobPosting(Long idJob_posting, String text, Professional professional_idProfessional) {
-        this.idJob_posting = idJob_posting;
-        this.text = text;
-        Professional_idProfessional = professional_idProfessional;
-    }
+    @OneToMany
+    private List<String> pictures;
+    @OneToMany
+    private List<String> videos;
 
     public Long getIdJob_posting() {
         return idJob_posting;
@@ -53,5 +44,29 @@ public class JobPosting {
         Professional_idProfessional = professional_idProfessional;
     }
 
+    public List<String> getPictures() {
+        return pictures;
+    }
 
+    public void setPictures(List<String> pictures) {
+        this.pictures = pictures;
+    }
+
+    public List<String> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<String> videos) {
+        this.videos = videos;
+    }
+
+    public JobPosting() {  }
+
+    public JobPosting(Long idJob_posting, String text, Professional professional_idProfessional, List<String> pictures, List<String> videos) {
+        this.idJob_posting = idJob_posting;
+        this.text = text;
+        Professional_idProfessional = professional_idProfessional;
+        this.pictures = pictures;
+        this.videos = videos;
+    }
 }

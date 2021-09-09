@@ -19,7 +19,7 @@ public class JobPostingDao implements Dao<JobPosting>{
 
     @Override
     public Optional<JobPosting> get(long id){
-        return Optional.ofNullable(job_postings.get(int)id);
+        return Optional.ofNullable(job_postings.get((int)id));
     }
 
     @Override

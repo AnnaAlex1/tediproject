@@ -2,6 +2,7 @@ package com.devproject.tediproject.dao;
 
 import com.devproject.tediproject.model.Experience;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,8 +37,8 @@ public class ExperienceDao implements Dao<Experience>{
         experience_rec.setTitle(Objects.requireNonNull(
                 params[0], "Title cannot be null"));
         experience_rec.setCompany_name(Objects.requireNonNull(params[1], "Company Name cannot be null"));
-//        experience_rec.setStart_date();
-//        experience_rec.setEnd_date();
+        experience_rec.setStart_date(LocalDate.parse(params[2]));
+        experience_rec.setEnd_date(LocalDate.parse(params[3]));
         experience_recs.add(experience_rec);
     }
 

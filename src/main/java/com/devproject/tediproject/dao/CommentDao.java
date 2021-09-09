@@ -25,16 +25,9 @@ public class CommentDao implements Dao<Comment> {
     public void insert(Comment comment) { comments.add(comment); }
 
     @Override
-    public void update(Comment comment, String text, Professional professional1, Professional professional2, Post post){
+    public void update(Comment comment,  String[] params){
         comment.setText(Objects.requireNonNull(
-                text, "Text cannot be null" ));
-        comment.setProfessional_idProfessional(professional1);
-        comment.setPost_idPost(post);
-        comment.setPost_Professional_idProfessional(professional2);
-//        comment.setPost_idPost(Long.parseLong(params[1]));
-//        comment.setPost_Professional_idProfessional(Long.parseLong(params[2]));
-//        comment.setProfessional_idProfessional(Long.parseLong(params[3]));
-
+                params[0], "Message text cannot be null"));
         comments.add(comment);
     }
 

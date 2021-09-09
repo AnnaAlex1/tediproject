@@ -2,10 +2,8 @@ package com.devproject.tediproject.dao;
 
 import com.devproject.tediproject.model.Education;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 public class EducationDao implements Dao<Education>{
 
@@ -36,8 +34,8 @@ public class EducationDao implements Dao<Education>{
         education_rec.setTitle(Objects.requireNonNull(
                 params[0], "Title cannot be null"));
         education_rec.setType(Objects.requireNonNull(params[1], "Type cannot be null"));
-        //education_rec.setDate();
-//        education_rec.setGrade();
+        education_rec.setGrade(Float.parseFloat(params[2]));
+        education_rec.setDate(LocalDate.parse(params[3]));
         education_rec.setInstitution_name(Objects.requireNonNull(params[4], "Institution name cannot be null"));
         education_recs.add(education_rec);
     }

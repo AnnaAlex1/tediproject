@@ -3,7 +3,8 @@ package com.devproject.tediproject.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Data
 @Entity
@@ -11,8 +12,8 @@ import java.util.Date;
 public class Experience {
 
     @Id private String title;
-    private Date start_date;
-    private Date end_date;
+    private LocalDate start_date;
+    private LocalDate end_date;
     @Id private String company_name;
 
     @ManyToOne(cascade= CascadeType.ALL)
@@ -21,7 +22,7 @@ public class Experience {
 
     public Experience() { }
 
-    public Experience(String title, Date start_date, Date end_date, String company_name, Professional professional_idProfessional) {
+    public Experience(String title, LocalDate start_date, LocalDate end_date, String company_name, Professional professional_idProfessional) {
         this.title = title;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -37,19 +38,19 @@ public class Experience {
         this.title = title;
     }
 
-    public Date getStart_date() {
+    public LocalDate getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(LocalDate start_date) {
         this.start_date = start_date;
     }
 
-    public Date getEnd_date() {
+    public LocalDate getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(LocalDate end_date) {
         this.end_date = end_date;
     }
 

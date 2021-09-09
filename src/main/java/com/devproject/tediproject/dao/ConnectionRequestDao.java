@@ -32,11 +32,8 @@ public class ConnectionRequestDao implements Dao<ConnectionRequest>{
 
     @Override
     public void update(ConnectionRequest connectionRequest, String[] params){
-        connectionRequest.setFrom(Long.parseLong(params[0]));
-        connectionRequest.setTo(Long.parseLong(params[1]));
-        connectionRequest.setFromIsFollowingTo(Integer.parseInt(params[2]));
-        connectionRequest.setToIsFollowingFrom(Integer.parseInt(params[3]));
-
+        connectionRequest.setFromIsFollowingTo(Boolean.parseBoolean(params[0]));
+        connectionRequest.setToIsFollowingFrom(Boolean.parseBoolean(params[1]));
         connectionRequests.add(connectionRequest);
     }
 
