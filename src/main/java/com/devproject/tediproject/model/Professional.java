@@ -18,12 +18,17 @@ public class Professional {
     private String name;
     private String surname;
     private String email;
-    private Long phone;
+    private String phone;
     private String picture_url;
     private Boolean name_surname_public;
     private Boolean email_public;
     private Boolean phone_public;
 
+//    @OneToMany
+//    private List<Education> educationList;
+//
+//    @OneToMany
+//    private List<Experience> experienceList;
 
     @OneToMany(targetEntity = Message.class)
     private List<Message> messageList;
@@ -34,7 +39,8 @@ public class Professional {
 
 
     public Professional() {}
-    public Professional(Long id, String username, String password, String name, String surname, String email, Long phone, String picture_url, Boolean name_surname_public, Boolean email_public, Boolean phone_public) {
+
+    public Professional(Long id, String username, String password, String name, String surname, String email, String phone, String picture_url, Boolean name_surname_public, Boolean email_public, Boolean phone_public, List<Education> educationList, List<Experience> experienceList, List<Message> messageList, List<Post> postList) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -46,6 +52,10 @@ public class Professional {
         this.name_surname_public = name_surname_public;
         this.email_public = email_public;
         this.phone_public = phone_public;
+//        this.educationList = educationList;
+//        this.experienceList = experienceList;
+        this.messageList = messageList;
+        this.postList = postList;
     }
 
     public Long getId() {
@@ -92,21 +102,17 @@ public class Professional {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) { this.email = email; }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getPicture_url() {
-        return picture_url;
-    }
+    public String getPicture_url() { return picture_url; }
 
     public void setPicture_url(String picture_url) {
         this.picture_url = picture_url;
@@ -135,6 +141,36 @@ public class Professional {
     public void setPhone_public(Boolean phone_public) {
         this.phone_public = phone_public;
     }
+//
+//    public List<Education> getEducationList() {
+//        return educationList;
+//    }
+//
+//    public void setEducationList(List<Education> educationList) {
+//        this.educationList = educationList;
+//    }
+//
+//    public List<Experience> getExperienceList() {
+//        return experienceList;
+//    }
+//
+//    public void setExperienceList(List<Experience> experienceList) {
+//        this.experienceList = experienceList;
+//    }
 
+    public List<Message> getMessageList() {
+        return messageList;
+    }
 
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
+    }
+
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
 }

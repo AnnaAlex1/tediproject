@@ -1,15 +1,14 @@
 package com.devproject.tediproject.dao;
 
-import com.devproject.tediproject.model.Notification;
+import com.devproject.tediproject.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-import static java.util.Objects.requireNonNull;
 
-public class NotificationDao implements Dao<Notification> {
+
+public abstract class NotificationDao implements Dao<Notification> {
 
     private List<Notification> notifications = new ArrayList<>();
 
@@ -32,14 +31,17 @@ public class NotificationDao implements Dao<Notification> {
         notifications.add(notification);
     }
 
-    @Override
-    public void update(Notification notification, String[] params){
-        notification.setIdNotification(requireNonNull(Long.parseLong(params[0]),"IdMessage cannot be null"));
-        notification.setText(params[1]);
 
+    public void update(Notification notification, Long id, String text, Professional prof, Post post, ConnectionRequest request, Like like){
+
+        notification.setIdNotification(id);
+        notification.setText(text);
+        notification.setProf(prof);
+        notification.setPost(post);
+        notification.setC_request(request);
+        notification.setLike(like);
         notifications.add(notification);
 
-        //set post, connection_request, like
     }
 
     @Override

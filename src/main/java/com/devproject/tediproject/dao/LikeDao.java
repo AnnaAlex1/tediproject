@@ -2,6 +2,7 @@ package com.devproject.tediproject.dao;
 
 import com.devproject.tediproject.model.Like;
 import com.devproject.tediproject.model.Post;
+import com.devproject.tediproject.model.Professional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,9 @@ public abstract class LikeDao implements Dao<Like> {
         this.likes = likes;
     }
 
-    public Optional<Like> get(Post post){
-        return Optional.ofNullable(likes.get(likes.indexOf(post)));
+    @Override
+    public Optional<Like> get(long likeId){
+        return Optional.ofNullable(likes.get((int)likeId));
     }
 
     @Override
@@ -29,17 +31,14 @@ public abstract class LikeDao implements Dao<Like> {
         likes.add(like);
     }
 
-    /*
-    @Override
-    public void update(Like like, String[] params){
-        like.setUsername(Objects.requireNonNull(
-                params[0], "Username cannot be null"));
-        like.setPassword(Objects.requireNonNull(params[1], "Password cannot be null"));
+
+    public void update(Like like, Long likeId, List<Professional> professionals, Post post){
+        like.setLikeId(likeId);
+        like.setProfessionals_liked(professionals);
+        like.setPost(post);
 
         likes.add(like);
     }
-
-     */
 
     @Override
     public void delete(Like like){

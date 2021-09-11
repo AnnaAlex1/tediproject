@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 import java.sql.Timestamp;
 
@@ -21,22 +22,19 @@ public class Message {
     @JoinColumn(name="Professional_idProfessional2")
     private Professional prof2;
 
-    private String text;
     private Timestamp date_time;
 
-    private Set<String> pictureSet;
-    private Set<String> videoSet;
+    @OneToMany
+    private List<Content> content;
 
     public Message() { }
 
-    public Message(Long idMessage, Professional prof1, Professional prof2, String text, Timestamp date_time, Set<String> pictureSet, Set<String> videoSet) {
+    public Message(Long idMessage, Professional prof1, Professional prof2, Timestamp date_time, List<Content> content) {
         this.idMessage = idMessage;
         this.prof1 = prof1;
         this.prof2 = prof2;
-        this.text = text;
         this.date_time = date_time;
-        this.pictureSet = pictureSet;
-        this.videoSet = videoSet;
+        this.content = content;
     }
 
     public Long getIdMessage() {
@@ -45,14 +43,6 @@ public class Message {
 
     public void setIdMessage(Long idMessage) {
         this.idMessage = idMessage;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public Timestamp getDate_time() {
@@ -79,20 +69,11 @@ public class Message {
         this.prof2 = prof2;
     }
 
-    public Set getPictureSet() {
-        return pictureSet;
+    public List<Content> getContent() {
+        return content;
     }
 
-    public void setPictureSet(Set pictureSet) {
-        this.pictureSet = pictureSet;
+    public void setContent(List<Content> content) {
+        this.content = content;
     }
-
-    public Set getVideoSet() {
-        return videoSet;
-    }
-
-    public void setVideoSet(Set videoSet) {
-        this.videoSet = videoSet;
-    }
-
 }

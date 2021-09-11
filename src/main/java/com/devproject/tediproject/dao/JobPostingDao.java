@@ -1,47 +1,48 @@
 package com.devproject.tediproject.dao;
 
+import com.devproject.tediproject.model.Content;
 import com.devproject.tediproject.model.JobPosting;
+import com.devproject.tediproject.model.Professional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class JobPostingDao implements Dao<JobPosting>{
+public abstract class JobPostingDao implements Dao<JobPosting>{
 
-    private List<JobPosting> job_postings = new ArrayList<>();
+    private List<JobPosting> jobPostings = new ArrayList<>();
 
-    public JobPostingDao(List<JobPosting> job_postings) {
-        this.job_postings = job_postings;
+    public JobPostingDao(List<JobPosting> jobPostings) {
+        this.jobPostings = jobPostings;
     }
-
 
 
     @Override
     public Optional<JobPosting> get(long id){
-        return Optional.ofNullable(job_postings.get((int)id));
+        return Optional.ofNullable(jobPostings.get((int)id));
     }
 
     @Override
     public List<JobPosting> getAll(){
-        return job_postings;
+        return jobPostings;
     }
 
     @Override
-    public void insert(JobPosting job_posting){
-        job_postings.add(job_posting);
+    public void insert(JobPosting jobPosting){
+        jobPostings.add(jobPosting);
+    }
+
+
+    public void update(JobPosting jobPosting, Long jobPostingId, List<Content> content, Professional professional){
+        jobPosting.setIdJobPosting(jobPostingId);
+        jobPosting.setContent(content);
+        jobPosting.setProfessional_idProfessional(professional);
+        jobPostings.add(jobPosting);
     }
 
     @Override
-    public void update(JobPosting job_posting, String[] params){
-        job_posting.setText(Objects.requireNonNull(
-                params[0], "Text cannot be empty"));
-        job_postings.add(job_posting);
-    }
-
-    @Override
-    public void delete(JobPosting job_posting){
-        job_postings.remove(job_posting);
+    public void delete(JobPosting jobPosting){
+        jobPostings.remove(jobPosting);
     }
 
 }

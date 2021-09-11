@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ProfessionalNotFoundAdvice {
 
     @ResponseBody
-    @ExceptionHandler(AdminNotFoundException.class)
+    @ExceptionHandler(ProfessionalNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String adminNotFoundHandler(ProfessionalNotFoundException ex){
+    String ProfessionalNotFoundHandler(ProfessionalNotFoundException ex){
         return ex.getMessage();
     }
 }

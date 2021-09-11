@@ -1,13 +1,13 @@
 package com.devproject.tediproject.dao;
 
 import com.devproject.tediproject.model.ConnectionRequest;
+import com.devproject.tediproject.model.Professional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class ConnectionRequestDao implements Dao<ConnectionRequest>{
+public abstract class ConnectionRequestDao implements Dao<ConnectionRequest>{
 
     private List<ConnectionRequest> connectionRequests = new ArrayList<>();
 
@@ -30,10 +30,12 @@ public class ConnectionRequestDao implements Dao<ConnectionRequest>{
         connectionRequests.add(connectionRequest);
     }
 
-    @Override
-    public void update(ConnectionRequest connectionRequest, String[] params){
-        connectionRequest.setFromIsFollowingTo(Boolean.parseBoolean(params[0]));
-        connectionRequest.setToIsFollowingFrom(Boolean.parseBoolean(params[1]));
+
+    public void update(ConnectionRequest connectionRequest, Professional from, Professional to, Boolean fromTo, Boolean toFrom ){
+        connectionRequest.setFrom(from);
+        connectionRequest.setTo(to);
+        connectionRequest.setFromIsFollowingTo(fromTo);
+        connectionRequest.setToIsFollowingFrom(toFrom);
         connectionRequests.add(connectionRequest);
     }
 

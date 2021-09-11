@@ -4,8 +4,6 @@ import com.devproject.tediproject.model.Like;
 import com.devproject.tediproject.model.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LikeRepository extends JpaRepository<Like, Post> {
+public interface LikeRepository extends JpaRepository<Like, Long> {
 
-    Like findByPost(Post post);
-    void deleteByPost(Post post);
 }

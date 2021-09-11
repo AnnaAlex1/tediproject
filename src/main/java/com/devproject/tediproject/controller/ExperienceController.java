@@ -2,9 +2,7 @@ package com.devproject.tediproject.controller;
 
 import com.devproject.tediproject.model.Experience;
 import com.devproject.tediproject.model.ExperienceId;
-import com.devproject.tediproject.model.Professional;
 import com.devproject.tediproject.repository.ExperienceRepository;
-import com.devproject.tediproject.repository.ProfessionalRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +39,9 @@ public class ExperienceController {
                     return repository.save(experience);
                 })
                 .orElseGet(() -> {
+                    newExperience.setTitle(id2.getTitle());
+                    newExperience.setCompany_name(id2.getCompany_name());
+                    newExperience.setProfessional_idProfessional(id2.getProfessional_idProfessional());
                     return repository.save(newExperience);
                 });
     }

@@ -12,7 +12,6 @@ import java.util.List;
 public class Post {
 
     private @GeneratedValue @Id Long idPost;
-    private String text;
     private Timestamp date_time;
 
     @ManyToOne
@@ -20,18 +19,23 @@ public class Post {
     private Professional prof;
 
     @OneToMany
+    private List<Content> content;
+
+    @OneToMany
     private List<Like> likes;
 
     @OneToMany
     private List<Comment> comments;
 
+
+
     public Post() { }
 
-    public Post(Long idPost, String text, Timestamp date_time, Professional prof, List<Like> likes, List<Comment> comments) {
+    public Post(Long idPost, Timestamp date_time, Professional prof, List<Content> content, List<Like> likes, List<Comment> comments) {
         this.idPost = idPost;
-        this.text = text;
         this.date_time = date_time;
         this.prof = prof;
+        this.content = content;
         this.likes = likes;
         this.comments = comments;
     }
@@ -42,14 +46,6 @@ public class Post {
 
     public void setIdPost(Long idPost) {
         this.idPost = idPost;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public Timestamp getDate_time() {
@@ -76,15 +72,13 @@ public class Post {
         this.comments = comments;
     }
 
-/*
-    public Long getProfessional_idProfessional() {
-        return Professional_idProfessional;
+    public List<Content> getContent() {
+        return content;
     }
 
-    public void setProfessional_idProfessional(Long professional_idProfessional) {
-        Professional_idProfessional = professional_idProfessional;
+    public void setContent(List<Content> content) {
+        this.content = content;
     }
-    */
 
     public Professional getProf() {
         return prof;

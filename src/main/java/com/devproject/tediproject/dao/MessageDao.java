@@ -1,16 +1,17 @@
 package com.devproject.tediproject.dao;
 
+import com.devproject.tediproject.model.Content;
 import com.devproject.tediproject.model.Message;
+import com.devproject.tediproject.model.Professional;
 
 import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Objects.*;
 
-public class MessageDao implements Dao<Message> {
+
+public abstract class MessageDao implements Dao<Message> {
 
     private List<Message> messages = new ArrayList<>();
 
@@ -24,24 +25,20 @@ public class MessageDao implements Dao<Message> {
     }
 
     @Override
-    public List<Message> getAll(){
-        return messages;
-    }
+    public List<Message> getAll(){ return messages; }
 
     @Override
     public void insert(Message message){
         messages.add(message);
     }
 
-    @Override
-    public void update(Message message, String[] params){
-        message.setIdMessage(requireNonNull(Long.parseLong(params[0]),"IdMessage cannot be null"));
-        //message.setIdprofessional1(requireNonNull(Long.parseLong(params[1]),"IdProfessional1 cannot be null"));
-        //message.setIdprofessional2(requireNonNull(Long.parseLong(params[2]),"IdProfessional2 cannot be null"));
-        message.setText(params[1]);
-        message.setDate_time(Timestamp.valueOf(params[2]));
 
-        //set prof1,prof2,pic,video
+    public void update(Message message, Long messageId, List<Content> content, Timestamp date, Professional prof1, Professional prof2){
+        message.setIdMessage(messageId);
+        message.setContent(content);
+        message.setDate_time(date);
+        message.setProf1(prof1);
+        message.setProf2(prof2);
 
         messages.add(message);
     }

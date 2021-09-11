@@ -32,7 +32,7 @@ public class CommentController {
 
         return repository.findById(id)
                 .map(comment -> {
-                    comment.setText(newComment.getText());
+                    comment.setContent(newComment.getContent());
                     return repository.save(comment);
                 })
                 .orElseGet(() -> {

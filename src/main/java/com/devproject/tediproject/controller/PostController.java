@@ -33,7 +33,7 @@ public class PostController {
         return repository.findById(id)
                 .map(post -> {
                     post.setIdPost(newPost.getIdPost());
-                    post.setText(newPost.getText());
+                    post.setContent(post.getContent());
                     post.setDate_time(newPost.getDate_time());
                     post.setProf(newPost.getProf());
                     return repository.save(post);

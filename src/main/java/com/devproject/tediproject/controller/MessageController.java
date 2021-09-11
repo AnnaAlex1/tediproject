@@ -34,9 +34,7 @@ public class MessageController {
         return repository.findById(id)
                 .map(message -> {
                     message.setIdMessage(newMessage.getIdMessage());
-                    message.setIdprofessional1(newMessage.getIdprofessional1());
-                    message.setIdprofessional2(newMessage.getIdprofessional2());
-                    message.setText(newMessage.getText());
+                    message.setContent(newMessage.getContent());
                     message.setDate_time(newMessage.getDate_time());
                     return repository.save(message);
                 })
@@ -46,6 +44,6 @@ public class MessageController {
                 });
     }
 
-    @DeleteMapping("/message/{id}")
+    @DeleteMapping("/messages/{id}")
     void deleteMessage(@PathVariable Long id) { repository.deleteById(id); }
 }

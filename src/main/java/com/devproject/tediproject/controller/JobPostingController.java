@@ -28,11 +28,11 @@ public class JobPostingController {
     JobPosting replaceJobPosting(@RequestBody JobPosting newJobPosting, @PathVariable Long id){
         return repository.findById(id)
                 .map( jobPosting -> {
-                    jobPosting.setText(newJobPosting.getText());
+                    jobPosting.setContent(newJobPosting.getContent());
                     return repository.save(jobPosting);
                 })
                 .orElseGet( () -> {
-                    newJobPosting.setIdJob_posting(id);
+                    newJobPosting.setIdJobPosting(id);
                     return repository.save((newJobPosting));
                 });
     }

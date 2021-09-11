@@ -3,13 +3,13 @@ package com.devproject.tediproject.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 public class Comment {
 
     private @Id @GeneratedValue Long idComment;
-    private String text;
 
     @OneToOne(cascade= CascadeType.ALL)
     private Professional Professional_idProfessional;
@@ -20,15 +20,26 @@ public class Comment {
     @OneToOne(cascade= CascadeType.ALL)
     private Professional Post_Professional_idProfessional;
 
+    @OneToMany
+    private List<Content> content;
+
 
     public Comment(){}
 
-    public Comment(Long idComment, String text, Professional professional_idProfessional, Post post_idPost, Professional post_Professional_idProfessional) {
+    public List<Content> getContent() {
+        return content;
+    }
+
+    public void setContent(List<Content> content) {
+        this.content = content;
+    }
+
+    public Comment(Long idComment, Professional professional_idProfessional, Post post_idPost, Professional post_Professional_idProfessional, List<Content> content) {
         this.idComment = idComment;
-        this.text = text;
         Professional_idProfessional = professional_idProfessional;
         Post_idPost = post_idPost;
         Post_Professional_idProfessional = post_Professional_idProfessional;
+        this.content = content;
     }
 
     public Long getIdComment() {
@@ -39,13 +50,6 @@ public class Comment {
         this.idComment = idComment;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 
     public Professional getProfessional_idProfessional() {
         return Professional_idProfessional;

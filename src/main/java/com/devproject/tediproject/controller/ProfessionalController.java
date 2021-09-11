@@ -7,6 +7,7 @@ import com.devproject.tediproject.repository.ProfessionalRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class ProfessionalController {
@@ -33,8 +34,18 @@ public class ProfessionalController {
 
         return repository.findById(id)
                 .map(professional -> {
+                    professional.setId(newProfessional.getId());
                     professional.setUsername(newProfessional.getUsername());
                     professional.setPassword(newProfessional.getPassword());
+                    professional.setName(newProfessional.getName());
+                    professional.setSurname(newProfessional.getSurname());
+                    professional.setEmail(newProfessional.getEmail());
+                    professional.setPhone(newProfessional.getPhone());
+                    professional.setPicture_url(newProfessional.getPicture_url());
+                    professional.setName_surname_public(newProfessional.getName_surname_public());
+                    professional.setEmail_public(newProfessional.getEmail_public());
+                    professional.setPhone_public(newProfessional.getPhone_public());
+
                     return repository.save(professional);
                 })
                 .orElseGet(() -> {

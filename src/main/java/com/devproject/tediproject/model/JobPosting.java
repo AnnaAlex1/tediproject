@@ -9,31 +9,40 @@ import java.util.List;
 @Entity
 public class JobPosting {
 
-    private @Id @GeneratedValue Long idJob_posting;
-    private String text;
+    private @Id @GeneratedValue Long idJobPosting;
 
     @OneToOne(cascade= CascadeType.ALL)
     private Professional Professional_idProfessional;
 
     @OneToMany
-    private List<String> pictures;
-    @OneToMany
-    private List<String> videos;
+    private List<Content> content;
 
-    public Long getIdJob_posting() {
-        return idJob_posting;
+
+
+    public JobPosting() {  }
+
+    public JobPosting(Long idJobPosting, Professional professional_idProfessional, List<Content> content) {
+        this.idJobPosting = idJobPosting;
+        Professional_idProfessional = professional_idProfessional;
+        this.content = content;
     }
 
-    public void setIdJob_posting(Long idJob_posting) {
-        this.idJob_posting = idJob_posting;
+
+
+    public List<Content> getContent() {
+        return content;
     }
 
-    public String getText() {
-        return text;
+    public void setContent(List<Content> content) {
+        this.content = content;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public Long getIdJobPosting() {
+        return idJobPosting;
+    }
+
+    public void setIdJobPosting(Long idJobPosting) {
+        this.idJobPosting = idJobPosting;
     }
 
     public Professional getProfessional_idProfessional() {
@@ -44,29 +53,5 @@ public class JobPosting {
         Professional_idProfessional = professional_idProfessional;
     }
 
-    public List<String> getPictures() {
-        return pictures;
-    }
 
-    public void setPictures(List<String> pictures) {
-        this.pictures = pictures;
-    }
-
-    public List<String> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<String> videos) {
-        this.videos = videos;
-    }
-
-    public JobPosting() {  }
-
-    public JobPosting(Long idJob_posting, String text, Professional professional_idProfessional, List<String> pictures, List<String> videos) {
-        this.idJob_posting = idJob_posting;
-        this.text = text;
-        Professional_idProfessional = professional_idProfessional;
-        this.pictures = pictures;
-        this.videos = videos;
-    }
 }

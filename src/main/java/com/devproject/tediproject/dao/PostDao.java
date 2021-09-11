@@ -1,14 +1,10 @@
 package com.devproject.tediproject.dao;
 
-import com.devproject.tediproject.model.Post;
-
+import com.devproject.tediproject.model.*;
 import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static java.util.Objects.requireNonNull;
-
-public class PostDao implements Dao<Post>{
+public abstract class PostDao implements Dao<Post>{
 
     private List<Post> posts = new ArrayList<>();
 
@@ -31,12 +27,14 @@ public class PostDao implements Dao<Post>{
         posts.add(post);
     }
 
-    @Override
-    public void update(Post post, String[] params){
-        post.setIdPost(requireNonNull(Long.parseLong(params[0]),"IdPost cannot be null"));
-        post.setText(Objects.requireNonNull(params[1], "Password cannot be null"));
-        post.setDate_time(Timestamp.valueOf(params[2]));
-        //post.setProf(params[3]);
+
+    public void update(Post post, Long id, List<Content> content, Timestamp date, List<Comment> comments, List<Like> likes, Professional prof){
+        post.setIdPost(id);
+        post.setContent(content);
+        post.setDate_time(date);
+        post.setComments(comments);
+        post.setLikes(likes);
+        post.setProf(prof);
 
         posts.add(post);
     }

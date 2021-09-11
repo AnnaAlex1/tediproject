@@ -8,10 +8,11 @@ import java.util.List;
 
 @Data
 @Entity
-@IdClass(LikeId.class)
+@Table(name="likes")
 public class Like {
 
-    @Id
+    @Id private Long likeId;
+
     @OneToOne
     private Post post;
 
@@ -19,13 +20,22 @@ public class Like {
     private List<Professional> professionals_liked;
 
 
-    @ManyToOne(targetEntity = Professional.class)
-    private Professional professional_posted;
-
-    @OneToMany(targetEntity = Professional.class)
-    private List<Professional> professionals_posted;
 
     public Like(){}
+
+    public Like(Long likeId, Post post, List<Professional> professionals_liked) {
+        this.likeId = likeId;
+        this.post = post;
+        this.professionals_liked = professionals_liked;
+    }
+
+    public Long getLikeId() {
+        return likeId;
+    }
+
+    public void setLikeId(Long likeId) {
+        this.likeId = likeId;
+    }
 
     public Post getPost() {
         return post;
@@ -42,14 +52,4 @@ public class Like {
     public void setProfessionals_liked(List<Professional> professionals_liked) {
         this.professionals_liked = professionals_liked;
     }
-
-    public Professional getProfessional_posted() {
-        return professional_posted;
-    }
-
-    public void setProfessional_posted(Professional professional_posted) {
-        this.professional_posted = professional_posted;
-    }
-
-
 }

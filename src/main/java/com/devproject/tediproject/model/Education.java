@@ -1,6 +1,7 @@
 package com.devproject.tediproject.model;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,20 +11,27 @@ import java.time.LocalDate;
 @IdClass(EducationId.class)
 public class Education {
 
-
     @Id private String title;
     private String type;
     private float grade;
     private LocalDate date;
     @Id private String institution_name;
 
-
+    @Id
     @ManyToOne(cascade= CascadeType.ALL)
-    private Professional Professional_idProfessional;
+    private Professional professional_idProfessional;
 
 
     public Education() { }
 
+    public Education(String title, String type, float grade, LocalDate date, String institution_name, Professional professional_idProfessional) {
+        this.title = title;
+        this.type = type;
+        this.grade = grade;
+        this.date = date;
+        this.institution_name = institution_name;
+        this.professional_idProfessional = professional_idProfessional;
+    }
 
 
     public String getTitle() {
@@ -58,14 +66,6 @@ public class Education {
         this.date = date;
     }
 
-    public Education(String title, String type, float grade, LocalDate date, String institution_name, Professional professional_idProfessional) {
-        this.title = title;
-        this.type = type;
-        this.grade = grade;
-        this.date = date;
-        this.institution_name = institution_name;
-        Professional_idProfessional = professional_idProfessional;
-    }
 
     public String getInstitution_name() {
         return institution_name;
@@ -76,10 +76,11 @@ public class Education {
     }
 
     public Professional getProfessional_idProfessional() {
-        return Professional_idProfessional;
+        return professional_idProfessional;
     }
 
     public void setProfessional_idProfessional(Professional professional_idProfessional) {
-        Professional_idProfessional = professional_idProfessional;
+        this.professional_idProfessional = professional_idProfessional;
     }
+
 }

@@ -1,6 +1,5 @@
 package com.devproject.tediproject.exception;
 
-import com.devproject.tediproject.model.ConnectionRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

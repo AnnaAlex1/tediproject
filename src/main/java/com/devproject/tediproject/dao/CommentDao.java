@@ -1,15 +1,15 @@
 package com.devproject.tediproject.dao;
 
 import com.devproject.tediproject.model.Comment;
+import com.devproject.tediproject.model.Content;
 import com.devproject.tediproject.model.Post;
 import com.devproject.tediproject.model.Professional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class CommentDao implements Dao<Comment> {
+public abstract class CommentDao implements Dao<Comment> {
 
     private List<Comment> comments = new ArrayList<>();
 
@@ -24,10 +24,12 @@ public class CommentDao implements Dao<Comment> {
     @Override
     public void insert(Comment comment) { comments.add(comment); }
 
-    @Override
-    public void update(Comment comment,  String[] params){
-        comment.setText(Objects.requireNonNull(
-                params[0], "Message text cannot be null"));
+
+    public void update(Comment comment, Long commentId, Professional professional, Post post, List<Content> content){
+        comment.setContent(content);
+        comment.setIdComment(commentId);
+        comment.setProfessional_idProfessional(professional);
+        comment.setPost_idPost(post);
         comments.add(comment);
     }
 

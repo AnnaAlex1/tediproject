@@ -21,9 +21,7 @@ public class EducationController {
     Education newExperience(@RequestBody Education newEducation, @PathVariable Long id) { return repository.save(newEducation); }
 
     @GetMapping("/professionals/{id}/education")
-    List<Education> get_All(@PathVariable Long id){
-        return  repository.findByProfessionalId(id);
-    }
+    List<Education> get_All(@PathVariable Long id){ return  repository.findByProfessionalId(id); }
 
     @PutMapping("/professionals/{id}/education/{id2}")
     Education replaceEducation(@RequestBody Education newEducation, @PathVariable Long id, @PathVariable EducationId id2){
@@ -39,7 +37,9 @@ public class EducationController {
                     return repository.save(education);
                 })
                 .orElseGet(() -> {
-//                    newExperience.setTitle(id2);
+                    newEducation.setTitle(id2.getTitle());
+                    newEducation.setInstitution_name(id2.getInstitution_name());
+                    newEducation.setProfessional_idProfessional(id2.getProfessional_idProfessional());
                     return repository.save(newEducation);
                 });
     }
