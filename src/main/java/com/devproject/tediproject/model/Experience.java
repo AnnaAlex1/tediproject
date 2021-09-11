@@ -18,17 +18,17 @@ public class Experience {
 
     @Id
     @ManyToOne(cascade= CascadeType.ALL)
-    private Professional Professional_idProfessional;
+    private Professional professionalId;
 
 
     public Experience() { }
 
-    public Experience(String title, LocalDate start_date, LocalDate end_date, String company_name, Professional professional_idProfessional) {
+    public Experience(String title, LocalDate start_date, LocalDate end_date, String company_name, Professional professionalId) {
         this.title = title;
         this.start_date = start_date;
         this.end_date = end_date;
         this.company_name = company_name;
-        Professional_idProfessional = professional_idProfessional;
+        this.professionalId = professionalId;
     }
 
     public String getTitle() {
@@ -63,11 +63,11 @@ public class Experience {
         this.company_name = company_name;
     }
 
-    public Professional getProfessional_idProfessional() {
-        return Professional_idProfessional;
+    public Professional getProfessionalId() {
+        return professionalId;
     }
 
-    public void setProfessional_idProfessional(Professional professional_idProfessional) {
-        Professional_idProfessional = professional_idProfessional;
+    public void setProfessionalId(Professional professionalId) {
+        this.professionalId = professionalId;
     }
 }

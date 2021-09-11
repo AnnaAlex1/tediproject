@@ -19,18 +19,18 @@ public class Education {
 
     @Id
     @ManyToOne(cascade= CascadeType.ALL)
-    private Professional professional_idProfessional;
+    private Professional professionalId;
 
 
     public Education() { }
 
-    public Education(String title, String type, float grade, LocalDate date, String institution_name, Professional professional_idProfessional) {
+    public Education(String title, String type, float grade, LocalDate date, String institution_name, Professional professionalId) {
         this.title = title;
         this.type = type;
         this.grade = grade;
         this.date = date;
         this.institution_name = institution_name;
-        this.professional_idProfessional = professional_idProfessional;
+        this.professionalId = professionalId;
     }
 
 
@@ -75,12 +75,11 @@ public class Education {
         this.institution_name = institution_name;
     }
 
-    public Professional getProfessional_idProfessional() {
-        return professional_idProfessional;
+    public Professional getProfessionalId() {
+        return professionalId;
     }
 
-    public void setProfessional_idProfessional(Professional professional_idProfessional) {
-        this.professional_idProfessional = professional_idProfessional;
+    public void setProfessionalId(Professional professionalId) {
+        this.professionalId = professionalId;
     }
-
 }

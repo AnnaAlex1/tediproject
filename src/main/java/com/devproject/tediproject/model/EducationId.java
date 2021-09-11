@@ -8,12 +8,12 @@ public class EducationId implements Serializable {
 
     private String title;
     private String institution_name;
-    private Professional professional_idProfessional;
+    private Professional professionalId;
 
-    public EducationId(String title, String institution_name, Professional professional_idProfessional) {
+    public EducationId(String title, String institution_name, Professional professionalId) {
         this.title = title;
         this.institution_name = institution_name;
-        this.professional_idProfessional = professional_idProfessional;
+        this.professionalId = professionalId;
     }
 
     public String getTitle() {
@@ -24,8 +24,8 @@ public class EducationId implements Serializable {
         return institution_name;
     }
 
-    public Professional getProfessional_idProfessional() {
-        return professional_idProfessional;
+    public Professional getProfessionalId() {
+        return professionalId;
     }
 
     @Override
@@ -33,11 +33,11 @@ public class EducationId implements Serializable {
         if (this == o) return true;
         if (!(o instanceof EducationId)) return false;
         EducationId that = (EducationId) o;
-        return getTitle().equals(that.getTitle()) && getInstitution_name().equals(that.getInstitution_name()) && getProfessional_idProfessional().equals(that.getProfessional_idProfessional());
+        return getTitle().equals(that.getTitle()) && getInstitution_name().equals(that.getInstitution_name()) && getProfessionalId().equals(that.getProfessionalId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getInstitution_name(), getProfessional_idProfessional());
+        return Objects.hash(getTitle(), getInstitution_name(), getProfessionalId());
     }
 }

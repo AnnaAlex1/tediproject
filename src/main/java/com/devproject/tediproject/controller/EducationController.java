@@ -33,13 +33,13 @@ public class EducationController {
                     education.setInstitution_name(newEducation.getInstitution_name());
                     education.setGrade(newEducation.getGrade());
                     education.setDate(newEducation.getDate());
-                    education.setProfessional_idProfessional(newEducation.getProfessional_idProfessional());
+                    education.setProfessionalId(newEducation.getProfessionalId());
                     return repository.save(education);
                 })
                 .orElseGet(() -> {
                     newEducation.setTitle(id2.getTitle());
                     newEducation.setInstitution_name(id2.getInstitution_name());
-                    newEducation.setProfessional_idProfessional(id2.getProfessional_idProfessional());
+                    newEducation.setProfessionalId(id2.getProfessionalId());
                     return repository.save(newEducation);
                 });
     }

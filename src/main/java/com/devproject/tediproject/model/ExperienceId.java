@@ -7,12 +7,12 @@ import java.util.Objects;
 public class ExperienceId implements Serializable {
     private String title;
     private String company_name;
-    private Professional Professional_idProfessional;
+    private Professional professionalId;
 
-    public ExperienceId(String title, String company_name, Professional professional_idProfessional) {
+    public ExperienceId(String title, String company_name, Professional professionalId) {
         this.title = title;
         this.company_name = company_name;
-        Professional_idProfessional = professional_idProfessional;
+        this.professionalId = professionalId;
     }
 
     public String getTitle() {
@@ -23,8 +23,8 @@ public class ExperienceId implements Serializable {
         return company_name;
     }
 
-    public Professional getProfessional_idProfessional() {
-        return Professional_idProfessional;
+    public Professional getProfessionalId() {
+        return professionalId;
     }
 
     @Override
@@ -32,11 +32,11 @@ public class ExperienceId implements Serializable {
         if (this == o) return true;
         if (!(o instanceof ExperienceId)) return false;
         ExperienceId that = (ExperienceId) o;
-        return getTitle().equals(that.getTitle()) && getCompany_name().equals(that.getCompany_name()) && getProfessional_idProfessional().equals(that.getProfessional_idProfessional());
+        return getTitle().equals(that.getTitle()) && getCompany_name().equals(that.getCompany_name()) && getProfessionalId().equals(that.getProfessionalId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getCompany_name(), getProfessional_idProfessional());
+        return Objects.hash(getTitle(), getCompany_name(), getProfessionalId());
     }
 }

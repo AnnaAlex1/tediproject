@@ -41,7 +41,7 @@ public class ExperienceController {
                 .orElseGet(() -> {
                     newExperience.setTitle(id2.getTitle());
                     newExperience.setCompany_name(id2.getCompany_name());
-                    newExperience.setProfessional_idProfessional(id2.getProfessional_idProfessional());
+                    newExperience.setProfessionalId(id2.getProfessionalId());
                     return repository.save(newExperience);
                 });
     }
