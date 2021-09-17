@@ -2,10 +2,7 @@ package com.devproject.tediproject.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -14,16 +11,16 @@ public class Notification {
     private @GeneratedValue @Id Long idNotification;
     private String text;
 
-    @OneToOne
+    @OneToOne(cascade= CascadeType.ALL)
     private Professional prof;
 
-    @OneToOne
+    @OneToOne(cascade= CascadeType.ALL)
     private Post post;
 
-    @OneToOne
+    @OneToOne(cascade= CascadeType.ALL)
     private ConnectionRequest c_request;
 
-    @OneToOne
+    @OneToOne(cascade= CascadeType.ALL)
     private Like like;
 
     public Notification() {}

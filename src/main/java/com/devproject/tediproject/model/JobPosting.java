@@ -1,5 +1,6 @@
 package com.devproject.tediproject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,7 +15,9 @@ public class JobPosting {
     @OneToOne(cascade= CascadeType.ALL)
     private Professional Professional_idProfessional;
 
-    @OneToMany
+
+    @OneToMany(mappedBy="jobPosting", cascade = CascadeType.ALL)
+    @JsonManagedReference(value="content-jobposting")
     private List<Content> content;
 
 

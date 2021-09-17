@@ -1,5 +1,6 @@
 package com.devproject.tediproject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,22 +19,26 @@ public class Post {
     @JoinColumn(name = "Professional_idProfessional")
     private Professional prof;
 
-    @OneToMany
+
+    @OneToMany(mappedBy="post", cascade = CascadeType.ALL)
+    @JsonManagedReference(value="content-post")
     private List<Content> content;
 
-    @OneToMany
+    @OneToMany(cascade= CascadeType.ALL)
+    @JsonManagedReference(value="post-like")
     private List<Like> likes;
 
-    @OneToMany
+    @OneToMany(cascade= CascadeType.ALL)
+    @JsonManagedReference(value="comment-post")
     private List<Comment> comments;
 
 
 
     public Post() { }
 
-    public Post(Long idPost, Timestamp date_time, Professional prof, List<Content> content, List<Like> likes, List<Comment> comments) {
+    public Post(Long idPost, Professional prof, List<Content> content, List<Like> likes, List<Comment> comments) {
         this.idPost = idPost;
-        this.date_time = date_time;
+        this.date_time = new Timestamp(System.currentTimeMillis());
         this.prof = prof;
         this.content = content;
         this.likes = likes;

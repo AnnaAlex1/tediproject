@@ -11,6 +11,7 @@ import javax.persistence.Id;
 public class Admin {
 
     private @Id @GeneratedValue Long id;
+
     private String username;
     private String password;
 

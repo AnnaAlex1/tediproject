@@ -15,7 +15,7 @@ public class PostController {
         this.repository = repository;
     }
 
-    @PostMapping("/posts")
+    @PostMapping("/posts/add")
     Post newPost(@RequestBody Post newPost) { return repository.save(newPost); }
 
     @GetMapping("/posts")
@@ -25,6 +25,11 @@ public class PostController {
     Post get_one(@PathVariable Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException(id));
+    }
+
+    @GetMapping("/posts/{profId}/feed")
+    List<Post> getPostsInFeed(@PathVariable String profId){
+        return repository.getPostsInFeed(Long.parseLong(profId));
     }
 
     @PutMapping("/posts/{id}")

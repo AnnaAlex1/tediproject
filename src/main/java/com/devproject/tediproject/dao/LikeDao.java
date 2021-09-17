@@ -32,9 +32,10 @@ public abstract class LikeDao implements Dao<Like> {
     }
 
 
-    public void update(Like like, Long likeId, List<Professional> professionals, Post post){
+    public void update(Like like, Long likeId, /*List<Professional> professionals*/ Professional professional, Post post){
         like.setLikeId(likeId);
-        like.setProfessionals_liked(professionals);
+//        like.setProfessionals_liked(professionals);
+        like.setProfessional_liked(professional);
         like.setPost(post);
 
         likes.add(like);

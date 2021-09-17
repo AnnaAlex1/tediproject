@@ -28,8 +28,8 @@ public abstract class CommentDao implements Dao<Comment> {
     public void update(Comment comment, Long commentId, Professional professional, Post post, List<Content> content){
         comment.setContent(content);
         comment.setIdComment(commentId);
-        comment.setProfessional_idProfessional(professional);
-        comment.setPost_idPost(post);
+        comment.setProfessionalId(professional);
+        comment.setPostId(post);
         comments.add(comment);
     }
 

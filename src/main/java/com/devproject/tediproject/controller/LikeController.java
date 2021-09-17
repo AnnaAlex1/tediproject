@@ -1,5 +1,6 @@
 package com.devproject.tediproject.controller;
 
+import com.devproject.tediproject.model.Education;
 import com.devproject.tediproject.model.Like;
 import com.devproject.tediproject.repository.LikeRepository;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,11 @@ public class LikeController {
     @PostMapping("/post/{postId}")
     Like newLike(@RequestBody Like newLike) { return repository.save(newLike); }
 
-    @GetMapping("/post/{postId}/likes")
-    List<Like> get_All() { return repository.findAll(); }
+    @GetMapping("post/{postId}/likes")
+    List<Like> getLikeByPostId(Long postId) { return repository.findByPostIdPost(postId); }
+
+//    @GetMapping("/post/{postId}/likes")
+//    List<Like> get_All() { return repository.findAll(); }
 
     @DeleteMapping("/post/{postId}/{likeId}")
     void deleteLike(@PathVariable Long likeId) { repository.deleteById(likeId); }

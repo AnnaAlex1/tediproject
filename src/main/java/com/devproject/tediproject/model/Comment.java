@@ -1,5 +1,7 @@
 package com.devproject.tediproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,15 +14,19 @@ public class Comment {
     private @Id @GeneratedValue Long idComment;
 
     @OneToOne(cascade= CascadeType.ALL)
-    private Professional Professional_idProfessional;
+    @JoinColumn(name="professional_id_id")
+    private Professional professionalId;
 
     @ManyToOne(cascade= CascadeType.ALL)
-    private Post Post_idPost;
+    @JsonBackReference(value="comment-post")
+    @JoinColumn(name="post_id_id_post")
+    private Post postId;
 
-    @OneToOne(cascade= CascadeType.ALL)
-    private Professional Post_Professional_idProfessional;
+//    @OneToOne(cascade= CascadeType.ALL)
+//    private Professional postAuthorId;
 
-    @OneToMany
+    @OneToMany(mappedBy="comment", cascade = CascadeType.ALL)
+    @JsonManagedReference(value="content-comment")
     private List<Content> content;
 
 
@@ -34,11 +40,10 @@ public class Comment {
         this.content = content;
     }
 
-    public Comment(Long idComment, Professional professional_idProfessional, Post post_idPost, Professional post_Professional_idProfessional, List<Content> content) {
+    public Comment(Long idComment, Professional professionalId, Post postId, List<Content> content) {
         this.idComment = idComment;
-        Professional_idProfessional = professional_idProfessional;
-        Post_idPost = post_idPost;
-        Post_Professional_idProfessional = post_Professional_idProfessional;
+        this.professionalId = professionalId;
+        this.postId = postId;
         this.content = content;
     }
 
@@ -51,27 +56,21 @@ public class Comment {
     }
 
 
-    public Professional getProfessional_idProfessional() {
-        return Professional_idProfessional;
+    public Professional getProfessionalId() {
+        return professionalId;
     }
 
-    public void setProfessional_idProfessional(Professional professional_idProfessional) {
-        Professional_idProfessional = professional_idProfessional;
+    public void setProfessionalId(Professional professionalId) {
+        this.professionalId = professionalId;
     }
 
-    public Post getPost_idPost() {
-        return Post_idPost;
+    public Post getPostId() {
+        return postId;
     }
 
-    public void setPost_idPost(Post post_idPost) {
-        Post_idPost = post_idPost;
+    public void setPostId(Post postId) {
+        this.postId = postId;
     }
 
-    public Professional getPost_Professional_idProfessional() {
-        return Post_Professional_idProfessional;
-    }
 
-    public void setPost_Professional_idProfessional(Professional post_Professional_idProfessional) {
-        Post_Professional_idProfessional = post_Professional_idProfessional;
-    }
 }

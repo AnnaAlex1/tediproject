@@ -1,5 +1,6 @@
 package com.devproject.tediproject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,7 +25,8 @@ public class Message {
 
     private Timestamp date_time;
 
-    @OneToMany
+    @OneToMany(mappedBy="message", cascade = CascadeType.ALL)
+    @JsonManagedReference(value="content-message")
     private List<Content> content;
 
     public Message() { }

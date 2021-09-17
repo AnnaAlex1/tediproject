@@ -2,10 +2,7 @@ package com.devproject.tediproject.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -13,11 +10,11 @@ import java.util.List;
 public class Professional {
 
     @Id @GeneratedValue private Long id;
-    private String username;
+    @Column(unique = true) private String username;
     private String password;
     private String name;
     private String surname;
-    private String email;
+    @Column(unique = true) private String email;
     private String phone;
     private String picture_url;
     private Boolean name_surname_public;
@@ -30,10 +27,10 @@ public class Professional {
 //    @OneToMany
 //    private List<Experience> experienceList;
 
-    @OneToMany(targetEntity = Message.class)
+    @OneToMany(targetEntity = Message.class, cascade = CascadeType.ALL)
     private List<Message> messageList;
 
-    @OneToMany(targetEntity = Post.class)
+    @OneToMany(targetEntity = Post.class, cascade = CascadeType.ALL)
     private List<Post> postList;
 
 

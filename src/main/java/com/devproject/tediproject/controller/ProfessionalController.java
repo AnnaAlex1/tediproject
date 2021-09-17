@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
+
 @RestController
 public class ProfessionalController {
     private final ProfessionalRepository repository;
@@ -20,8 +21,11 @@ public class ProfessionalController {
     @PostMapping("/professionals")
     Professional newProfessional(@RequestBody Professional newProfessional) { return repository.save(newProfessional); }
 
-    @GetMapping("/professionals")
+    @GetMapping("/professionals/all")
     List<Professional> get_All() { return repository.findAll(); }
+
+    @GetMapping("/professionals/{id}/following")
+    List<Professional> getFollowing(@PathVariable Long id){ return repository.getFollowing(id);}
 
     @GetMapping("/professionals/{id}")
     Professional get_one(@PathVariable Long id){
