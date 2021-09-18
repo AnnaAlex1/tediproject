@@ -46,6 +46,9 @@ public abstract class ProfessionalDao implements Dao<Professional>{
         professional.setName_surname_public(Boolean.parseBoolean(params[8]));
         professional.setEmail_public(Boolean.parseBoolean(params[9]));
         professional.setPhone_public(Boolean.parseBoolean(params[10]));
+        professional.setWork_position(params[11]);
+        professional.setWork_place(params[12]);
+
 //        professional.setEducationList(educationList);
 //        professional.setExperienceList(experienceList);
 

@@ -49,6 +49,8 @@ public class ProfessionalController {
                     professional.setName_surname_public(newProfessional.getName_surname_public());
                     professional.setEmail_public(newProfessional.getEmail_public());
                     professional.setPhone_public(newProfessional.getPhone_public());
+                    professional.setWork_position(newProfessional.getWork_position());
+                    professional.setWork_place(newProfessional.getWork_place());
 
                     return repository.save(professional);
                 })
