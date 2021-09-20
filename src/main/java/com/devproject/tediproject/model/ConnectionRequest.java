@@ -6,14 +6,18 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@IdClass(ConnectionRequestId.class)
 public class ConnectionRequest {
+//
+//    @OneToOne(cascade= CascadeType.ALL)
+//    @JoinColumn(name = "from_id")
+//    @Id private Professional from;
+//
+//    @OneToOne(cascade= CascadeType.ALL)
+//    @JoinColumn(name = "to_id")
+//    @Id private Professional to;
 
-    @OneToOne(cascade= CascadeType.ALL)
-    @Id private Professional from;
-
-    @OneToOne(cascade= CascadeType.ALL)
-    @Id private Professional to;
+    @EmbeddedId
+    private ConnectionRequestId idFromTo;
 
     private boolean fromIsFollowingTo;
 
@@ -23,28 +27,18 @@ public class ConnectionRequest {
 
     public ConnectionRequest() { }
 
-    public ConnectionRequest(Professional from, Professional to, boolean fromIsFollowingTo, boolean toIsFollowingFrom) {
-        this.from = from;
-        this.to = to;
-        this.fromIsFollowingTo = fromIsFollowingTo;
-        this.toIsFollowingFrom = toIsFollowingFrom;
+    public ConnectionRequestId getIdFromTo() {
+        return idFromTo;
     }
 
-
-    public Professional getFrom() {
-        return from;
+    public void setIdFromTo(ConnectionRequestId idFromTo) {
+        this.idFromTo = idFromTo;
     }
 
-    public void setFrom(Professional from) {
-        this.from = from;
-    }
-
-    public Professional getTo() {
-        return to;
-    }
-
-    public void setTo(Professional to) {
-        this.to = to;
+    public ConnectionRequest(ConnectionRequestId idFromTo) {
+        this.idFromTo = idFromTo;
+        this.fromIsFollowingTo = false;
+        this.toIsFollowingFrom = false;
     }
 
     public boolean isFromIsFollowingTo() {

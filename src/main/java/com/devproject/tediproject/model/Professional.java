@@ -43,7 +43,11 @@ public class Professional {
 
     public Professional() {}
 
-    public Professional(Long id, String username, String password, String name, String surname, String email, String phone, String picture_url, Boolean name_surname_public, Boolean email_public, Boolean phone_public, List<Education> educationList, List<Experience> experienceList, List<Message> messageList, List<Post> postList) {
+    public Professional(Long id, String username, String password, String name,
+                        String surname, String email, String phone, String picture_url,
+                        Boolean name_surname_public, Boolean email_public, Boolean phone_public,
+                        String work_position, String work_place, List<Message> messageList,
+                        List<Post> postList) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -55,8 +59,8 @@ public class Professional {
         this.name_surname_public = name_surname_public;
         this.email_public = email_public;
         this.phone_public = phone_public;
-//        this.educationList = educationList;
-//        this.experienceList = experienceList;
+        this.work_position = work_position;
+        this.work_place = work_place;
         this.messageList = messageList;
         this.postList = postList;
     }
@@ -178,21 +182,14 @@ public class Professional {
         this.postList = postList;
     }
 
-    public String getWork_position() {
-        return work_position;
-    }
+    public String getWork_position() { return work_position; }
 
-    public void setWork_position(String work_position) {
-        this.work_position = work_position;
-    }
+    public void setWork_position(String work_position) { this.work_position = work_position;  }
 
-    public String getWork_place() {
-        return work_place;
-    }
+    public String getWork_place() { return work_place; }
 
-    public void setWork_place(String work_place) {
-        this.work_place = work_place;
-    }
+    public void setWork_place(String work_place) { this.work_place = work_place; }
+
 
     //ADDS
     public void addNewPost( Post post ) { this.postList.add(post); }

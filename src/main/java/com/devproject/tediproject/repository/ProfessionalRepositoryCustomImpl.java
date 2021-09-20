@@ -20,7 +20,7 @@ public class ProfessionalRepositoryCustomImpl implements ProfessionalRepositoryC
         Query query = entityManager.createQuery(
                 "SELECT fr\n" +
                         "FROM Professional pro, Professional fr, ConnectionRequest con\n" +
-                        "WHERE pro.id = con.from.id AND con.to.id = fr.id AND con.fromIsFollowingTo = true AND pro.id = ?1");
+                        "WHERE pro.id = con.idFromTo.from.id AND con.idFromTo.to.id = fr.id AND con.fromIsFollowingTo = true AND pro.id = ?1");
         query.setParameter(1, id);
         return query.getResultList();
     }

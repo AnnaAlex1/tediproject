@@ -1,6 +1,7 @@
 package com.devproject.tediproject.dao;
 
 import com.devproject.tediproject.model.ConnectionRequest;
+import com.devproject.tediproject.model.ConnectionRequestId;
 import com.devproject.tediproject.model.Professional;
 
 import java.util.ArrayList;
@@ -31,9 +32,11 @@ public abstract class ConnectionRequestDao implements Dao<ConnectionRequest>{
     }
 
 
-    public void update(ConnectionRequest connectionRequest, Professional from, Professional to, Boolean fromTo, Boolean toFrom ){
-        connectionRequest.setFrom(from);
-        connectionRequest.setTo(to);
+//    public void update(ConnectionRequest connectionRequest, Professional from, Professional to, Boolean fromTo, Boolean toFrom ){
+//        connectionRequest.setFrom(from);
+//        connectionRequest.setTo(to);
+    public void update(ConnectionRequest connectionRequest, ConnectionRequestId idFromTo, Boolean fromTo, Boolean toFrom ){
+        connectionRequest.setIdFromTo(idFromTo);
         connectionRequest.setFromIsFollowingTo(fromTo);
         connectionRequest.setToIsFollowingFrom(toFrom);
         connectionRequests.add(connectionRequest);

@@ -1,15 +1,23 @@
 package com.devproject.tediproject.model;
 
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
 
+@Embeddable
 public class ConnectionRequestId implements Serializable {
-    private Long from;
-    private Long to;
+    @OneToOne(cascade= CascadeType.ALL)
+    private Professional from;
+    @OneToOne(cascade= CascadeType.ALL)
+    private Professional to;
 
-    public ConnectionRequestId(Long from, Long to) {
+    public ConnectionRequestId() { }
+
+    public ConnectionRequestId(Professional from, Professional to) {
         this.from = from;
         this.to = to;
     }
