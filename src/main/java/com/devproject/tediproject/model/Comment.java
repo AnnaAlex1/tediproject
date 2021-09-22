@@ -22,28 +22,27 @@ public class Comment {
     @JoinColumn(name="post_id_id_post")
     private Post postId;
 
-//    @OneToOne(cascade= CascadeType.ALL)
-//    private Professional postAuthorId;
-
     @OneToMany(mappedBy="comment", cascade = CascadeType.ALL)
     @JsonManagedReference(value="content-comment")
     private List<Content> content;
 
+//    @OneToOne(cascade= CascadeType.ALL)
+//    private Professional postAuthorId;
+
 
     public Comment(){}
+    public Comment(Professional professionalId, Post postId) {
+        this.professionalId = professionalId;
+        this.postId = postId;
+    }
+
+
 
     public List<Content> getContent() {
         return content;
     }
 
     public void setContent(List<Content> content) {
-        this.content = content;
-    }
-
-    public Comment(Long idComment, Professional professionalId, Post postId, List<Content> content) {
-        this.idComment = idComment;
-        this.professionalId = professionalId;
-        this.postId = postId;
         this.content = content;
     }
 
@@ -54,7 +53,6 @@ public class Comment {
     public void setIdComment(Long idComment) {
         this.idComment = idComment;
     }
-
 
     public Professional getProfessionalId() {
         return professionalId;

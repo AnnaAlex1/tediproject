@@ -1,5 +1,6 @@
 package com.devproject.tediproject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,6 +21,8 @@ public class Professional {
     private Boolean name_surname_public;
     private Boolean email_public;
     private Boolean phone_public;
+    private String work_position;
+    private String work_place;
 
 //    @OneToMany
 //    private List<Education> educationList;
@@ -27,9 +30,12 @@ public class Professional {
 //    @OneToMany
 //    private List<Experience> experienceList;
 
+    @JsonManagedReference(value="prof-mes")
     @OneToMany(targetEntity = Message.class, cascade = CascadeType.ALL)
     private List<Message> messageList;
 
+
+    @JsonManagedReference(value="prof-post")
     @OneToMany(targetEntity = Post.class, cascade = CascadeType.ALL)
     private List<Post> postList;
 
@@ -37,7 +43,11 @@ public class Professional {
 
     public Professional() {}
 
-    public Professional(Long id, String username, String password, String name, String surname, String email, String phone, String picture_url, Boolean name_surname_public, Boolean email_public, Boolean phone_public, List<Education> educationList, List<Experience> experienceList, List<Message> messageList, List<Post> postList) {
+    public Professional(Long id, String username, String password, String name,
+                        String surname, String email, String phone, String picture_url,
+                        Boolean name_surname_public, Boolean email_public, Boolean phone_public,
+                        String work_position, String work_place, List<Message> messageList,
+                        List<Post> postList) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -49,8 +59,8 @@ public class Professional {
         this.name_surname_public = name_surname_public;
         this.email_public = email_public;
         this.phone_public = phone_public;
-//        this.educationList = educationList;
-//        this.experienceList = experienceList;
+        this.work_position = work_position;
+        this.work_place = work_place;
         this.messageList = messageList;
         this.postList = postList;
     }
@@ -138,6 +148,7 @@ public class Professional {
     public void setPhone_public(Boolean phone_public) {
         this.phone_public = phone_public;
     }
+
 //
 //    public List<Education> getEducationList() {
 //        return educationList;
@@ -170,4 +181,16 @@ public class Professional {
     public void setPostList(List<Post> postList) {
         this.postList = postList;
     }
+
+    public String getWork_position() { return work_position; }
+
+    public void setWork_position(String work_position) { this.work_position = work_position;  }
+
+    public String getWork_place() { return work_place; }
+
+    public void setWork_place(String work_place) { this.work_place = work_place; }
+
+
+    //ADDS
+    public void addNewPost( Post post ) { this.postList.add(post); }
 }

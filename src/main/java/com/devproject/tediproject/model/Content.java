@@ -35,5 +35,48 @@ public class Content {
     private Post post;
 
 
+    public Content() { }
 
+    public Content(ContentType type, String path) {
+        this.type = type;
+        this.path = path;
+    }
+
+    public Content(ContentType type, String path, Post post) {
+        this.type = type;
+        this.path = path;
+        this.post = post;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+
+    public JobPosting getJobPosting() {
+        return jobPosting;
+    }
+
+    public void setJobPosting(JobPosting jobPosting) {
+        this.jobPosting = jobPosting;
+    }
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }

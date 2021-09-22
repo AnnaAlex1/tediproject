@@ -35,7 +35,6 @@ public abstract class PostDao implements Dao<Post>{
         post.setComments(comments);
         post.setLikes(likes);
         post.setProf(prof);
-
         posts.add(post);
     }
 

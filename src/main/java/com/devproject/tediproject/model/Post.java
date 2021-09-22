@@ -1,5 +1,6 @@
 package com.devproject.tediproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -13,12 +14,13 @@ import java.util.List;
 public class Post {
 
     private @GeneratedValue @Id Long idPost;
+
     private Timestamp date_time;
 
     @ManyToOne
-    @JoinColumn(name = "Professional_idProfessional")
+    @JsonBackReference(value="prof-post")
+//    @JoinColumn(name = "professional_id_professional")
     private Professional prof;
-
 
     @OneToMany(mappedBy="post", cascade = CascadeType.ALL)
     @JsonManagedReference(value="content-post")
@@ -36,13 +38,11 @@ public class Post {
 
     public Post() { }
 
-    public Post(Long idPost, Professional prof, List<Content> content, List<Like> likes, List<Comment> comments) {
-        this.idPost = idPost;
+    public Post(Professional prof) {
         this.date_time = new Timestamp(System.currentTimeMillis());
         this.prof = prof;
-        this.content = content;
-        this.likes = likes;
-        this.comments = comments;
+        this.likes = null;
+        this.comments = null;
     }
 
     public Long getIdPost() {
@@ -92,4 +92,10 @@ public class Post {
     public void setProf(Professional prof) {
         this.prof = prof;
     }
+
+
+    //ADD
+    public void addNewLike(Like like) { this.likes.add(like); }
+
+    public void addNewComment(Comment comment) { this.comments.add(comment); }
 }

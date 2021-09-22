@@ -12,32 +12,26 @@ import java.util.List;
 @Table(name="likes")
 public class Like {
 
-    @Id private Long likeId;
+    @Id @GeneratedValue private Long likeId;
 
     @ManyToOne
     @JsonBackReference(value="post-like")
     private Post post;
 
-//    @OneToMany(targetEntity = Professional.class)
-//    private List<Professional> professionals_liked;
-
     @OneToOne(cascade= CascadeType.ALL)
     private Professional professional_liked;
 
+
+
     public Like(){}
 
-//    public Like(Long likeId, Post post, List<Professional> professionals_liked) {
-//        this.likeId = likeId;
-//        this.post = post;
-//        this.professionals_liked = professionals_liked;
-//    }
-
-
-    public Like(Long likeId, Post post, Professional professional_liked) {
-        this.likeId = likeId;
+    public Like(Post post, Professional professional_liked) {
         this.post = post;
         this.professional_liked = professional_liked;
     }
+
+
+
 
     public Long getLikeId() {
         return likeId;
@@ -62,11 +56,5 @@ public class Like {
     public void setProfessional_liked(Professional professional_liked) {
         this.professional_liked = professional_liked;
     }
-//    public List<Professional> getProfessionals_liked() {
-//        return professionals_liked;
-//    }
 
-//    public void setProfessionals_liked(List<Professional> professionals_liked) {
-//        this.professionals_liked = professionals_liked;
-//    }
 }
