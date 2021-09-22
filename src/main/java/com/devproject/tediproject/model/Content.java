@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Entity
 public class Content {
     @Id @GeneratedValue private Long contentId;
+
+    @Enumerated(EnumType.STRING)
     private ContentType type;
     private String path;
 
