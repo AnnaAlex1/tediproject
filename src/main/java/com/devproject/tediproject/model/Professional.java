@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -12,16 +14,18 @@ import java.util.List;
 public class Professional {
 
     @Id @GeneratedValue private Long id;
-    @Column(unique = true) private String username;
-    private String password;
-    private String name;
-    private String surname;
-    @Column(unique = true) private String email;
+    @Column(unique = true)
+    @NotNull private String username;
+    @NotNull private String password;
+    @NotNull private String name;
+    @NotNull private String surname;
+    @Column(unique = true)
+    @NotNull private String email;
     private String phone;
     private String picture_url;
-    private Boolean name_surname_public;
-    private Boolean email_public;
-    private Boolean phone_public;
+    @NotNull private Boolean name_surname_public;
+    @NotNull private Boolean email_public;
+    @NotNull private Boolean phone_public;
     private String work_position;
     private String work_place;
 
@@ -39,6 +43,9 @@ public class Professional {
     @JsonManagedReference(value="prof-post")
     @OneToMany(targetEntity = Post.class, cascade = CascadeType.ALL)
     private List<Post> postList;
+
+    @ManyToMany(mappedBy = "interested", cascade = CascadeType.ALL)
+    private List<JobPosting> applications;
 
 
 
@@ -59,6 +66,7 @@ public class Professional {
         this.work_place = null;
         this.messageList = null;
         this.postList = null;
+        this.applications = null;
     }
 
     public Long getId() {
@@ -186,6 +194,13 @@ public class Professional {
 
     public void setWork_place(String work_place) { this.work_place = work_place; }
 
+    public List<JobPosting> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(List<JobPosting> applications) {
+        this.applications = applications;
+    }
 
     //ADDS
     public void addNewPost( Post post ) { this.postList.add(post); }

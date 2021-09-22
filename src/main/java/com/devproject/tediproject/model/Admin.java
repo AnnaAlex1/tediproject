@@ -5,14 +5,16 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
 public class Admin {
 
     private @Id @GeneratedValue Long id;
-
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
 
     public Admin() {}

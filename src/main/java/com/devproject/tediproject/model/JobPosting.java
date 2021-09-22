@@ -15,10 +15,13 @@ public class JobPosting {
     @OneToOne(cascade= CascadeType.ALL)
     private Professional Professional_idProfessional;
 
-
     @OneToMany(mappedBy="jobPosting", cascade = CascadeType.ALL)
     @JsonManagedReference(value="content-jobposting")
     private List<Content> content;
+
+    @ManyToMany(mappedBy="applications", cascade = CascadeType.ALL)
+//    @JsonManagedReference(value="prof-jobposting")
+    private List<Professional> interested;
 
 
 

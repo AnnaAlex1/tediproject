@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -17,9 +19,10 @@ public class Post {
 
     private Timestamp date_time;
 
+    @NotNull
     @ManyToOne
     @JsonBackReference(value="prof-post")
-//    @JoinColumn(name = "professional_id_professional")
+    @JoinColumn(name = "professional_id")
     private Professional prof;
 
     @OneToMany(mappedBy="post", cascade = CascadeType.ALL)
