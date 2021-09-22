@@ -1,5 +1,6 @@
 package com.devproject.tediproject.model;
 
+import com.devproject.tediproject.payload.ProfessionalAddRequest;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -43,26 +44,21 @@ public class Professional {
 
     public Professional() {}
 
-    public Professional(Long id, String username, String password, String name,
-                        String surname, String email, String phone, String picture_url,
-                        Boolean name_surname_public, Boolean email_public, Boolean phone_public,
-                        String work_position, String work_place, List<Message> messageList,
-                        List<Post> postList) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phone = phone;
-        this.picture_url = picture_url;
-        this.name_surname_public = name_surname_public;
-        this.email_public = email_public;
-        this.phone_public = phone_public;
-        this.work_position = work_position;
-        this.work_place = work_place;
-        this.messageList = messageList;
-        this.postList = postList;
+    public Professional(ProfessionalAddRequest prof) {
+        this.username = prof.getUsername();
+        this.password = prof.getPassword();
+        this.name = prof.getName();
+        this.surname = prof.getSurname();
+        this.email = prof.getEmail();
+        this.phone = prof.getPhone();
+        this.picture_url = prof.getPicture_url();
+        this.name_surname_public = true;
+        this.email_public = true;
+        this.phone_public = true;
+        this.work_position = null;
+        this.work_place = null;
+        this.messageList = null;
+        this.postList = null;
     }
 
     public Long getId() {

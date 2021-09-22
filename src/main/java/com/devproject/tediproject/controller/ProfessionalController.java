@@ -1,13 +1,18 @@
 package com.devproject.tediproject.controller;
 
 import com.devproject.tediproject.exception.ProfessionalNotFoundException;
+import com.devproject.tediproject.model.Content;
+import com.devproject.tediproject.model.Post;
 import com.devproject.tediproject.model.Professional;
+import com.devproject.tediproject.payload.ProfessionalAddRequest;
 import com.devproject.tediproject.repository.ProfessionalRepository;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 @RestController
@@ -18,8 +23,13 @@ public class ProfessionalController {
         this.repository = repository;
     }
 
-    @PostMapping("/professionals")
-    Professional newProfessional(@RequestBody Professional newProfessional) { return repository.save(newProfessional); }
+    @PostMapping("/professionals/add")
+    Professional newProfessional(@RequestBody ProfessionalAddRequest newProfessionalRequest) {
+
+        Professional newProfessional = new Professional(newProfessionalRequest);
+        return repository.save(newProfessional);
+
+    }
 
     @GetMapping("/professionals/all")
     List<Professional> get_All() { return repository.findAll(); }
