@@ -3,6 +3,7 @@ package com.devproject.tediproject.dao;
 import com.devproject.tediproject.model.Content;
 import com.devproject.tediproject.model.JobPosting;
 import com.devproject.tediproject.model.Professional;
+import com.devproject.tediproject.payload.JobPostingAddRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public abstract class JobPostingDao implements Dao<JobPosting>{
     public void update(JobPosting jobPosting, Long jobPostingId, List<Content> content, Professional professional){
         jobPosting.setIdJobPosting(jobPostingId);
         jobPosting.setContent(content);
-        jobPosting.setProfessional_idProfessional(professional);
+        jobPosting.setProfessional(professional);
         jobPostings.add(jobPosting);
     }
 
