@@ -10,26 +10,26 @@ import javax.persistence.*;
 public class Content {
     @Id @GeneratedValue private Long contentId;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     private ContentType type;
     private String path;
 
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "comment_id")
     @JsonBackReference(value="content-comment")
     private Comment comment;
 
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "jobPosting_id")
     @JsonBackReference(value="content-jobposting")
     private JobPosting jobPosting;
 
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "message_id")
     @JsonBackReference(value="content-message")
     private Message message;
 
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "post_id")
     @JsonBackReference(value="content-post")
     private Post post;

@@ -15,12 +15,12 @@ public class Comment {
     private @Id @GeneratedValue Long idComment;
 
     @NotBlank
-    @OneToOne(cascade= CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="professional_id_id")
     private Professional professionalId;
 
     @NotBlank
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne
     @JsonBackReference(value="comment-post")
     @JoinColumn(name="post_id_id_post")
     private Post postId;

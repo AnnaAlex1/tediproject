@@ -17,7 +17,7 @@ public class Experience {
     @Id private String company_name;
 
     @Id
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne
     private Professional professionalId;
 
 

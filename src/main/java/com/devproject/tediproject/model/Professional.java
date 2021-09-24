@@ -44,7 +44,7 @@ public class Professional {
     @OneToMany(targetEntity = Post.class, cascade = CascadeType.ALL)
     private List<Post> postList;
 
-    @ManyToMany(mappedBy = "interested", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<JobPosting> applications;
 
 
@@ -204,4 +204,6 @@ public class Professional {
 
     //ADDS
     public void addNewPost( Post post ) { this.postList.add(post); }
+
+    public void addNewApplication( JobPosting jobPosting ) { this.applications.add(jobPosting); }
 }

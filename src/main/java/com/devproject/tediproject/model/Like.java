@@ -18,7 +18,7 @@ public class Like {
     @JsonBackReference(value="post-like")
     private Post post;
 
-    @OneToOne(cascade= CascadeType.ALL)
+    @OneToOne
     private Professional professional_liked;
 
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -12,25 +13,28 @@ public class JobPosting {
 
     private @Id @GeneratedValue Long idJobPosting;
 
-    @OneToOne(cascade= CascadeType.ALL)
-    private Professional Professional_idProfessional;
+    private Timestamp date_time;
+
+    @OneToOne
+    @JoinColumn(name="prof_id")
+    private Professional professional;
 
     @OneToMany(mappedBy="jobPosting", cascade = CascadeType.ALL)
     @JsonManagedReference(value="content-jobposting")
     private List<Content> content;
 
-    @ManyToMany(mappedBy="applications", cascade = CascadeType.ALL)
-//    @JsonManagedReference(value="prof-jobposting")
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Professional> interested;
 
 
 
     public JobPosting() {  }
 
-    public JobPosting(Long idJobPosting, Professional professional_idProfessional, List<Content> content) {
-        this.idJobPosting = idJobPosting;
-        Professional_idProfessional = professional_idProfessional;
+    public JobPosting(Professional professional, List<Content> content) {
+        this.date_time = new Timestamp(System.currentTimeMillis());
+        this.professional = professional;
         this.content = content;
+        this.interested = null;
     }
 
 
@@ -51,13 +55,8 @@ public class JobPosting {
         this.idJobPosting = idJobPosting;
     }
 
-    public Professional getProfessional_idProfessional() {
-        return Professional_idProfessional;
-    }
-
-    public void setProfessional_idProfessional(Professional professional_idProfessional) {
-        Professional_idProfessional = professional_idProfessional;
-    }
+    //ADDS
+    public void addNewInterested( Professional professional ) { this.interested.add(professional); }
 
 
 }
