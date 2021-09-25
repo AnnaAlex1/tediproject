@@ -19,33 +19,36 @@ public class NotificationController {
     @PostMapping("/notifications")
     Notification newNotification(@RequestBody Notification newNotification) { return repository.save(newNotification); }
 
-    @GetMapping("/notifications")
-    List<Notification> get_All() { return repository.findAll(); }
-
-    @GetMapping("/notifications/{id}")
-    Notification get_one(@PathVariable Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new NotificationNotFoundException(id));
+    @GetMapping("/notifications/{profId}/all")
+    List<Notification> getRestOfNotifications(@PathVariable String profId) {
+        return repository.getRestOfNotifications(Long.parseLong(profId));
     }
 
-    @PutMapping("/notifications/{id}")
-    Notification replaceNotification(@RequestBody Notification newNotification, @PathVariable Long id){
 
-        return repository.findById(id)
-                .map(notification -> {
-                    notification.setIdNotification(newNotification.getIdNotification());
-                    notification.setText(newNotification.getText());
-                    notification.setC_request(newNotification.getC_request());
-                    notification.setPost(newNotification.getPost());
-                    notification.setProf(newNotification.getProf());
-                    notification.setLike(newNotification.getLike());
-                    return repository.save(notification);
-                })
-                .orElseGet(() -> {
-                    newNotification.setIdNotification(id);
-                    return repository.save(newNotification);
-                });
-    }
+//    @GetMapping("/notifications/{id}")
+//    Notification get_one(@PathVariable Long id){
+//        return repository.findById(id)
+//                .orElseThrow(() -> new NotificationNotFoundException(id));
+//    }
+
+//    @PutMapping("/notifications/{id}")
+//    Notification replaceNotification(@RequestBody Notification newNotification, @PathVariable Long id){
+//
+//        return repository.findById(id)
+//                .map(notification -> {
+//                    notification.setIdNotification(newNotification.getIdNotification());
+//                    notification.setText(newNotification.getText());
+//                    notification.setC_requestNot(newNotification.getC_requestNot());
+//                    notification.setCommentNot(newNotification.getCommentNot());
+//                    notification.setProf(newNotification.getProf());
+//                    notification.setLikeNot(newNotification.getLikeNot());
+//                    return repository.save(notification);
+//                })
+//                .orElseGet(() -> {
+//                    newNotification.setIdNotification(id);
+//                    return repository.save(newNotification);
+//                });
+//    }
 
     @DeleteMapping("/notifications/{id}")
     void deleteNotification(@PathVariable Long id) { repository.deleteById(id); }
