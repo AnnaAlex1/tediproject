@@ -28,7 +28,7 @@ public class ConversationsRepositoryCustomImpl implements ConversationsRepositor
         Query query = entityManager.createQuery(
                 "SELECT DISTINCT(c)\n" +
                         "FROM Conversations c\n" +
-                        "WHERE (c.professional1.id = ?1)"
+                        "WHERE (c.professional1.id = ?1 OR c.professional2.id = ?1)"
         );
         query.setParameter(1, profId);
         return query.getResultList();

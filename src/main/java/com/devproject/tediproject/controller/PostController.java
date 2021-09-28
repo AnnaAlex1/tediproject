@@ -1,10 +1,8 @@
 package com.devproject.tediproject.controller;
 
-import com.devproject.tediproject.exception.PostNotFoundException;
-import com.devproject.tediproject.model.Content;
-import com.devproject.tediproject.model.Post;
-import com.devproject.tediproject.model.Professional;
+import com.devproject.tediproject.model.*;
 import com.devproject.tediproject.payload.PostAddRequest;
+import com.devproject.tediproject.payload.PostResponse;
 import com.devproject.tediproject.repository.ContentRepository;
 import com.devproject.tediproject.repository.PostRepository;
 import com.devproject.tediproject.repository.ProfessionalRepository;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @RestController
@@ -26,6 +26,7 @@ public class PostController {
     @Autowired
     private ContentRepository contentRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 
     PostController(PostRepository repository) {
         this.repository = repository;
@@ -45,10 +46,6 @@ public class PostController {
         //create list of content
         List<Content> newContent = new ArrayList<Content>();;
         for (int i=0; i<newPostReq.getContent().size(); i++){
-//            Content tempContent = new Content(newPostReq.getContent().get(i).getType(),
-//                    newPostReq.getContent().get(i).getPath());
-//            tempContent.setPost(newPost);
-//            newContent.add(tempContent);
             newContent.add(new Content(newPostReq.getContent().get(i).getType(),
                     newPostReq.getContent().get(i).getPath(), newPost) );
         }
@@ -73,14 +70,39 @@ public class PostController {
     List<Post> get_All() { return repository.findAll(); }  //TODO: doesn't return profId
 
     @GetMapping("/posts/{id}")
-    Post get_one(@PathVariable Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new PostNotFoundException(id));
+    PostResponse get_one(@PathVariable Long id){
+        Optional<Post> res = repository.findById(id);
+        Post oldPost = res.get();
+
+        logger.info("Professional is: " + res.get().getProf().getUsername());
+
+        PostResponse pres = new PostResponse();
+        pres.setIdPost(oldPost.getIdPost());
+        pres.setContent(oldPost.getContent());
+        pres.setDate_time(oldPost.getDate_time());
+        pres.setComments(oldPost.getComments());
+        pres.setLikes(oldPost.getLikes());
+        pres.setProf(oldPost.getProf());
+
+        return pres;
+
     }
 
     @GetMapping("/posts/{profId}/feed")
-    List<Post> getPostsInFeed(@PathVariable String profId){
-        return repository.getPostsInFeed(Long.parseLong(profId));
+    List<PostResponse> getPostsInFeed(@PathVariable String profId){
+        List<Post> postList = repository.getPostsInFeed(Long.parseLong(profId));
+
+        List<PostResponse> responseList = new ArrayList<PostResponse>();
+        int i = 0;
+        while (i < postList.size()) {
+
+            responseList.add(new PostResponse(postList.get(i).getIdPost(),postList.get(i).getDate_time(),
+                                            postList.get(i).getProf(),postList.get(i).getContent(),
+                                            postList.get(i).getLikes(), postList.get(i).getComments()));
+            i++;
+        }
+
+        return responseList;
     }
 
     @PutMapping("/posts/{id}")
@@ -100,7 +122,17 @@ public class PostController {
                 });
     }
 
-    @DeleteMapping("/post/{id}")
-    void deletePost(@PathVariable Long id) { repository.deleteById(id); }
+    @DeleteMapping("/post/delete/{id}")
+    void deletePost(@PathVariable Long id) {
+        Optional<Post> res = repository.findById(id);
+        Post post = res.get();
+
+        Optional<Professional> res2 = profRepository.findById(post.getProf().getId());
+        Professional prof = res2.get();
+        prof.removePost(post);
+        this.profRepository.save(prof);
+        this.contentRepository.deleteByPostId(id);
+        repository.deleteById(id);
+    }
 
 }

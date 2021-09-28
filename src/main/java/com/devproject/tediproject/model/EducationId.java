@@ -10,6 +10,8 @@ public class EducationId implements Serializable {
     private String institution_name;
     private Professional professionalId;
 
+    public EducationId() { }
+
     public EducationId(String title, String institution_name, Professional professionalId) {
         this.title = title;
         this.institution_name = institution_name;

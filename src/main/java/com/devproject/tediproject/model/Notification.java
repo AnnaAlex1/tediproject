@@ -17,7 +17,7 @@ public class Notification {
 
 
     @ManyToOne
-    @JsonBackReference(value="profnot")
+    @JsonBackReference(value="prof-not")
     private Professional profId;
 
 

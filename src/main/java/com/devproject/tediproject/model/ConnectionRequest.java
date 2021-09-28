@@ -23,6 +23,9 @@ public class ConnectionRequest {
 
     private boolean toIsFollowingFrom;
 
+//    @OneToOne(mappedBy = "cRequestNot")
+//    private Notification notification;
+
 
 
     public ConnectionRequest() { }

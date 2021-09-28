@@ -21,6 +21,8 @@ public class Like {
     @OneToOne
     private Professional professional_liked;
 
+//    @OneToOne(mappedBy = "likeNot")
+//    private Notification notification;
 
 
     public Like(){}
@@ -29,8 +31,6 @@ public class Like {
         this.post = post;
         this.professional_liked = professional_liked;
     }
-
-
 
 
     public Long getLikeId() {

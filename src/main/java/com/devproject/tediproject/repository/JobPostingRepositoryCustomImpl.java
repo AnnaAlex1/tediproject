@@ -17,6 +17,7 @@ public class JobPostingRepositoryCustomImpl implements JobPostingRepositoryCusto
     @PersistenceContext
     EntityManager entityManager;
 
+    @Override
     public List<JobPosting> getJobPostingsByFriends(Long profId){
 
         Query query = entityManager.createQuery(
@@ -31,7 +32,7 @@ public class JobPostingRepositoryCustomImpl implements JobPostingRepositoryCusto
     }
 
 
-
+    @Override
     public List<JobPosting> getJobPostingsByNonFriends(Long profId){
         Query query = entityManager.createQuery(
                 "SELECT DISTINCT(jp)\n" +
@@ -45,7 +46,7 @@ public class JobPostingRepositoryCustomImpl implements JobPostingRepositoryCusto
     }
 
 
-
+    @Override
     public List<JobPosting> getMyJobPostings(Long profId){
         Query query = entityManager.createQuery(
                 "SELECT DISTINCT(jp)\n" +

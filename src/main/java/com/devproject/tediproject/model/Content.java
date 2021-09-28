@@ -46,6 +46,51 @@ public class Content {
         this.type = type;
         this.path = path;
         this.post = post;
+        this.message = null;
+        this.comment = null;
+        this.jobPosting = null;
+    }
+
+    public Content(ContentType type, String path, Message message) {
+        this.type = type;
+        this.path = path;
+        this.message = message;
+        this.post = null;
+        this.comment = null;
+        this.jobPosting = null;
+    }
+
+    public Content(ContentType type, String path, JobPosting jobPosting) {
+        this.type = type;
+        this.path = path;
+        this.message = null;
+        this.post = null;
+        this.comment = null;
+        this.jobPosting = jobPosting;
+    }
+
+    public Long getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
+    }
+
+    public ContentType getType() {
+        return type;
+    }
+
+    public void setType(ContentType type) {
+        this.type = type;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public Comment getComment() {

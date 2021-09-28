@@ -1,6 +1,7 @@
 package com.devproject.tediproject.controller;
 
 
+import com.devproject.tediproject.model.Content;
 import com.devproject.tediproject.model.JobPosting;
 import com.devproject.tediproject.model.Post;
 import com.devproject.tediproject.model.Professional;
@@ -11,6 +12,7 @@ import com.devproject.tediproject.repository.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +38,38 @@ public class JobPostingController {
 
     ////
     @PostMapping("/jobpostings/add")
-    JobPosting newJobPosting(@RequestBody JobPosting newJobPosting) { return repository.save(newJobPosting); }
+    JobPosting newJobPosting(@RequestBody JobPostingAddRequest newJobPostingReq) {
+
+        Optional<Professional> res = profRepository.findById(newJobPostingReq.getProfessional_id());
+        Professional prof = res.get();
+
+        //create new post //set professional
+        JobPosting newJobPosting = new JobPosting(prof);
+        repository.save(newJobPosting); //add post in database
+
+        //create list of content
+        List<Content> newContent = new ArrayList<Content>();;
+        for (int i=0; i<newJobPostingReq.getContentAdd().size(); i++){
+            newContent.add(new Content(newJobPostingReq.getContentAdd().get(i).getType(),
+                    newJobPostingReq.getContentAdd().get(i).getPath(), newJobPosting) );
+        }
+
+        // for new jobPost
+        newJobPosting.setContent(newContent); //set content of new post
+        repository.save(newJobPosting); //add post in database
+
+//        //for professional
+//        prof.addNewPost(newJobPosting); //add post to professional class
+//        profRepository.save(prof); //update professional
+
+        //add content to array of contents
+        for (int i=0; i<newContent.size(); i++) {
+            contentRepository.save(newContent.get(i));
+        }
+
+
+        return repository.save(newJobPosting);
+    }
 
     @GetMapping("/jobpostings/{profId}/friends")
     List<JobPosting> getJobPostingsByFriends(@PathVariable String profId){
@@ -66,6 +99,13 @@ public class JobPostingController {
 
         profRepository.save(prof);
         return repository.save(jobPosting);
+    }
+
+    @GetMapping("/jobpostings/{jobPostId}/interested")
+    List<Professional> getJobPostingInterested(@PathVariable Long jobPostId){
+        Optional<JobPosting> res = repository.findById(jobPostId);
+        JobPosting jobPosting = res.get();
+        return jobPosting.getInterested();
     }
     ///
 

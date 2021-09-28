@@ -1,16 +1,20 @@
 package com.devproject.tediproject.model;
 
 import com.devproject.tediproject.payload.ProfessionalAddRequest;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Professional {
 
     @Id @GeneratedValue private Long id;
@@ -29,22 +33,31 @@ public class Professional {
     private String work_position;
     private String work_place;
 
+    @JsonManagedReference(value="prof-not")
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Notification> userNotifications;
+
+
 //    @OneToMany
 //    private List<Education> educationList;
 //
 //    @OneToMany
 //    private List<Experience> experienceList;
-
-    @JsonManagedReference(value="prof-mes")
-    @OneToMany(targetEntity = Message.class, cascade = CascadeType.ALL)
-    private List<Message> messageList;
+//
+//    @JsonManagedReference(value="prof-mes")
+//    @OneToMany(targetEntity = Message.class, cascade = CascadeType.ALL)
+//    private List<Message> messageList;
+//
+//    @JsonManagedReference(value="prof-conv")
+//    @OneToMany(targetEntity = Conversations.class, cascade = CascadeType.ALL)
+//    private List<Conversations> conversationsList;
 
 
     @JsonManagedReference(value="prof-post")
     @OneToMany(targetEntity = Post.class, cascade = CascadeType.ALL)
     private List<Post> postList;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<JobPosting> applications;
 
 
@@ -64,7 +77,7 @@ public class Professional {
         this.phone_public = true;
         this.work_position = null;
         this.work_place = null;
-        this.messageList = null;
+//        this.messageList = null;
         this.postList = null;
         this.applications = null;
     }
@@ -153,7 +166,15 @@ public class Professional {
         this.phone_public = phone_public;
     }
 
-//
+    public List<Notification> getUserNotifications() {
+        return userNotifications;
+    }
+
+    public void setUserNotifications(List<Notification> userNotifications) {
+        this.userNotifications = userNotifications;
+    }
+
+    //
 //    public List<Education> getEducationList() {
 //        return educationList;
 //    }
@@ -170,13 +191,13 @@ public class Professional {
 //        this.experienceList = experienceList;
 //    }
 
-    public List<Message> getMessageList() {
-        return messageList;
-    }
-
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
-    }
+//    public List<Message> getMessageList() {
+//        return messageList;
+//    }
+//
+//    public void setMessageList(List<Message> messageList) {
+//        this.messageList = messageList;
+//    }
 
     public List<Post> getPostList() {
         return postList;
@@ -206,4 +227,7 @@ public class Professional {
     public void addNewPost( Post post ) { this.postList.add(post); }
 
     public void addNewApplication( JobPosting jobPosting ) { this.applications.add(jobPosting); }
+
+    public void removePost(Post post) { this.postList.remove(post);}
+
 }

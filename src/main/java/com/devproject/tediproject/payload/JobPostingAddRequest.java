@@ -8,6 +8,15 @@ import javax.persistence.*;
 import java.util.List;
 
 public class JobPostingAddRequest {
-    Long Professional_id;
+    Long professional_id;
     List<ContentAddRequest> contentAdd;
+
+    public Long getProfessional_id() {
+        return professional_id;
+    }
+
+    public List<ContentAddRequest> getContentAdd() {
+        return contentAdd;
+    }
+
 }

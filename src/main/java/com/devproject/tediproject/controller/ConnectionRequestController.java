@@ -1,11 +1,12 @@
 package com.devproject.tediproject.controller;
 
-import com.devproject.tediproject.exception.ConnectionRequestNotFoundException;
 import com.devproject.tediproject.model.ConnectionRequest;
 import com.devproject.tediproject.model.ConnectionRequestId;
+import com.devproject.tediproject.model.Conversations;
 import com.devproject.tediproject.model.Professional;
 import com.devproject.tediproject.payload.ConnectionAddRequest;
 import com.devproject.tediproject.repository.ConnectionRequestRepository;
+import com.devproject.tediproject.repository.ConversationsRepository;
 import com.devproject.tediproject.repository.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,9 @@ public class ConnectionRequestController {
 
     @Autowired
     private ProfessionalRepository profRepository;
+
+    @Autowired
+    private ConversationsRepository conversationsRepository;
 
 
     public ConnectionRequestController(ConnectionRequestRepository repository) {
@@ -38,28 +42,43 @@ public class ConnectionRequestController {
         Optional<Professional> res2 = profRepository.findById(connectionAddRequest.getTo());
         Professional profTo = res2.get();
 
-       ConnectionRequestId newConnectionRequestId = new ConnectionRequestId(profFrom, profTo);
+        ConnectionRequestId newConnectionRequestId = new ConnectionRequestId(profFrom, profTo);
 //        ConnectionRequest newConnectionRequest =
 //                new ConnectionRequest(profFrom, profTo);
 
-        ConnectionRequest newConnectionRequest =
-                new ConnectionRequest(newConnectionRequestId);
+        ConnectionRequest newConnectionRequest = new ConnectionRequest(newConnectionRequestId);
 
 
-        //TODO: request not arriving from frontend
+        // create a new conversation
+        Conversations newConversation = new Conversations(profTo, profFrom);
+        conversationsRepository.save(newConversation);
+
         return repository.save(newConnectionRequest);
     }
 
-    @GetMapping("/connectionrequests")
-    List<ConnectionRequest> get_All() { return  repository.findAll(); }
 
-    @GetMapping("/connectionrequests/{id}")
-    ConnectionRequest get_one(@PathVariable Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new ConnectionRequestNotFoundException(id));
+    @PutMapping("/connectionrequests/update")
+    ConnectionRequest updateConnectionRequest(@RequestBody ConnectionRequest updConnectionRequest){
+        Optional<ConnectionRequest> res = repository.findById(updConnectionRequest.getIdFromTo());
+        ConnectionRequest oldConnectionRequest = res.get();
+
+        oldConnectionRequest.setFromIsFollowingTo(true);
+        return repository.save(oldConnectionRequest);
     }
 
-    @DeleteMapping("connectionrequests/delete/{id}")
-    void deleteConnectionRequest(@PathVariable Long id) { repository.deleteById(id);}
+
+    @GetMapping("/connectionrequests/prof/{profId}")
+    List<ConnectionRequest> getConnectionRequests(@PathVariable String profId) {
+        return repository.getCRForProf(Long.parseLong(profId));
+    }
+
+
+    @DeleteMapping("connectionrequests/delete/{fromId}/{toId}")
+    void deleteConnectionRequest(@PathVariable String fromId, @PathVariable String toId) {
+        repository.deleteConnectionRequest(Long.parseLong(fromId), Long.parseLong(toId));
+    }
+
+
+
 
 }

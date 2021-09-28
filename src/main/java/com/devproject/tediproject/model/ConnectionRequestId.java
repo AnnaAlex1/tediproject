@@ -22,6 +22,14 @@ public class ConnectionRequestId implements Serializable {
         this.to = to;
     }
 
+    public Professional getFrom() {
+        return from;
+    }
+
+    public Professional getTo() {
+        return to;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

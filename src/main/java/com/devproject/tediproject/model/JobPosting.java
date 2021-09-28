@@ -1,14 +1,19 @@
 package com.devproject.tediproject.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "idJobPosting")
 @Data
 @Entity
+//@JsonIgnoreProperties(value="applications")
 public class JobPosting {
 
     private @Id @GeneratedValue Long idJobPosting;
@@ -23,17 +28,17 @@ public class JobPosting {
     @JsonManagedReference(value="content-jobposting")
     private List<Content> content;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Professional> interested;
 
 
 
     public JobPosting() {  }
 
-    public JobPosting(Professional professional, List<Content> content) {
+    public JobPosting(Professional professional) {
         this.date_time = new Timestamp(System.currentTimeMillis());
         this.professional = professional;
-        this.content = content;
+        this.content = null;
         this.interested = null;
     }
 
