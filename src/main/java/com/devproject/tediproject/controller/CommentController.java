@@ -13,6 +13,7 @@ import com.devproject.tediproject.repository.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,12 +47,10 @@ public class CommentController {
         Comment newComment = new Comment(prof, post);
 
         //add instants of content to database
-        List<Content> newContent = null;
+        List<Content> newContent = new ArrayList<Content>();;
         for (int i=0; i<newCommentRequest.getContent().size(); i++){
-            Content tempContent = new Content(newCommentRequest.getContent().get(i).getType(),
-                    newCommentRequest.getContent().get(i).getPath());
-            tempContent.setComment(newComment);
-            newContent.add(tempContent);
+            newContent.add(new Content(newCommentRequest.getContent().get(i).getType(),
+                    newCommentRequest.getContent().get(i).getPath(), newComment) );
         }
 
         //set list of contents in comment

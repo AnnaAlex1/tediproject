@@ -69,6 +69,15 @@ public class Content {
         this.jobPosting = jobPosting;
     }
 
+    public Content(ContentType type, String path, Comment comment) {
+        this.type = type;
+        this.path = path;
+        this.message = null;
+        this.post = null;
+        this.comment = comment;
+        this.jobPosting = null;
+    }
+
     public Long getContentId() {
         return contentId;
     }

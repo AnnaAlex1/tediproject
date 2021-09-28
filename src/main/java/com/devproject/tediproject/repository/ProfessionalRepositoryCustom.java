@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ProfessionalRepositoryCustom {
     public List<Professional> getFollowing(Long id);
+    public Professional findByUsername(String username);
 }

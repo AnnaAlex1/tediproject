@@ -23,6 +23,7 @@ public class ProfessionalController {
         this.repository = repository;
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/professionals/add")
     Professional newProfessional(@RequestBody ProfessionalAddRequest newProfessionalRequest) {
 
@@ -31,18 +32,22 @@ public class ProfessionalController {
 
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/professionals/all")
     List<Professional> get_All() { return repository.findAll(); }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/professionals/{id}/following")
     List<Professional> getFollowing(@PathVariable Long id){ return repository.getFollowing(id);}
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/professionals/{id}")
     Professional get_one(@PathVariable Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new ProfessionalNotFoundException(id));
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping("/professionals/{id}")
     Professional replaceProfessional(@RequestBody Professional newProfessional, @PathVariable Long id){
 
@@ -70,6 +75,7 @@ public class ProfessionalController {
                 });
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/professionals/{id}")
     void deleteProfessional(@PathVariable Long id) { repository.deleteById(id); }
 
