@@ -1,49 +1,75 @@
 package com.devproject.tediproject.controller;
 
 import com.devproject.tediproject.exception.MessageNotFoundException;
+import com.devproject.tediproject.model.Content;
+import com.devproject.tediproject.model.Conversations;
 import com.devproject.tediproject.model.Message;
+import com.devproject.tediproject.payload.MessageAddRequest;
+import com.devproject.tediproject.repository.ContentRepository;
+import com.devproject.tediproject.repository.ConversationsRepository;
 import com.devproject.tediproject.repository.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class MessageController {
 
     private final MessageRepository repository;
 
+    @Autowired
+    private ConversationsRepository convRepository;
+
+    @Autowired
+    private ContentRepository contentRepository;
+
     MessageController(MessageRepository repository) {
         this.repository = repository;
     }
 
-    @PostMapping("/messages")
-    Message newMessage(@RequestBody Message newMessage) { return repository.save(newMessage); }
+    @PostMapping("conversations/{convId}//message/add")
+    Message newMessage(@RequestBody MessageAddRequest newMessageReq) {
 
-    @GetMapping("/messages")
-    List<Message> get_All() { return repository.findAll(); }
+        // get conversations
+        Optional<Conversations> res = convRepository.findById(newMessageReq.getConversationId());
+        Conversations conversation = res.get();
 
-    @GetMapping("/messages/{id}")
-    Message get_one(@PathVariable Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new MessageNotFoundException(id));
+        Message newMessage = new Message(conversation);
+        repository.save(newMessage);
+
+        //create list of content
+        List<Content> newContent = new ArrayList<Content>();
+        for (int i=0; i<newMessageReq.getContent().size(); i++){
+            newContent.add(new Content(newMessageReq.getContent().get(i).getType(),
+                    newMessageReq.getContent().get(i).getPath(), newMessage) );
+        }
+
+        // for new message
+        newMessage.setContent(newContent); //set content of new message
+        repository.save(newMessage); //add message in database
+
+
+        //for conversation
+        conversation.setWasRead(false);
+        conversation.addInMessageList(newMessage); //add message to conversation class
+        convRepository.save(conversation); //update conversation
+
+        //add content to array of contents
+        for (int i=0; i<newContent.size(); i++) {
+            contentRepository.save(newContent.get(i));
+        }
+
+        return newMessage;
     }
 
-    @PutMapping("/messages/{id}")
-    Message replaceMessage(@RequestBody Message newMessage, @PathVariable Long id){
-
-        return repository.findById(id)
-                .map(message -> {
-                    message.setIdMessage(newMessage.getIdMessage());
-                    message.setContent(newMessage.getContent());
-                    message.setDate_time(newMessage.getDate_time());
-                    return repository.save(message);
-                })
-                .orElseGet(() -> {
-                    newMessage.setIdMessage(id);
-                    return repository.save(newMessage);
-                });
+    @GetMapping("conversations/{convId}/messages/all")
+    List<Message> getMessagesOfConversation(@PathVariable Long convId){
+        return repository.findByConversationId(convId);
     }
 
-    @DeleteMapping("/messages/{id}")
+    @DeleteMapping("conversations/{convId}/messages/{id}")
     void deleteMessage(@PathVariable Long id) { repository.deleteById(id); }
 }

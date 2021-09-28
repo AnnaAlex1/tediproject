@@ -40,7 +40,7 @@ public class LikeController {
 
         repository.save(newLike);
         postRepository.save(post);
-        return repository.save(newLike);
+        return newLike;
 
     }
 

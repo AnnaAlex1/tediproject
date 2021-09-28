@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Data
@@ -13,11 +14,13 @@ public class Comment {
 
     private @Id @GeneratedValue Long idComment;
 
-    @OneToOne(cascade= CascadeType.ALL)
+    @NotBlank
+    @OneToOne
     @JoinColumn(name="professional_id_id")
     private Professional professionalId;
 
-    @ManyToOne(cascade= CascadeType.ALL)
+    @NotBlank
+    @ManyToOne
     @JsonBackReference(value="comment-post")
     @JoinColumn(name="post_id_id_post")
     private Post postId;
@@ -26,24 +29,14 @@ public class Comment {
     @JsonManagedReference(value="content-comment")
     private List<Content> content;
 
-//    @OneToOne(cascade= CascadeType.ALL)
-//    private Professional postAuthorId;
+//    @OneToOne(mappedBy = "commentNot")
+//    private Notification notification;
 
 
     public Comment(){}
     public Comment(Professional professionalId, Post postId) {
         this.professionalId = professionalId;
         this.postId = postId;
-    }
-
-
-
-    public List<Content> getContent() {
-        return content;
-    }
-
-    public void setContent(List<Content> content) {
-        this.content = content;
     }
 
     public Long getIdComment() {
@@ -70,5 +63,11 @@ public class Comment {
         this.postId = postId;
     }
 
+    public List<Content> getContent() {
+        return content;
+    }
 
+    public void setContent(List<Content> content) {
+        this.content = content;
+    }
 }

@@ -10,9 +10,9 @@ import java.util.Objects;
 
 @Embeddable
 public class ConnectionRequestId implements Serializable {
-    @OneToOne(cascade= CascadeType.ALL)
+    @OneToOne
     private Professional from;
-    @OneToOne(cascade= CascadeType.ALL)
+    @OneToOne
     private Professional to;
 
     public ConnectionRequestId() { }
@@ -20,6 +20,14 @@ public class ConnectionRequestId implements Serializable {
     public ConnectionRequestId(Professional from, Professional to) {
         this.from = from;
         this.to = to;
+    }
+
+    public Professional getFrom() {
+        return from;
+    }
+
+    public Professional getTo() {
+        return to;
     }
 
     @Override

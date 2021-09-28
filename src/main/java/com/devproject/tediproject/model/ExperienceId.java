@@ -9,6 +9,8 @@ public class ExperienceId implements Serializable {
     private String company_name;
     private Professional professionalId;
 
+    public ExperienceId() { }
+
     public ExperienceId(String title, String company_name, Professional professionalId) {
         this.title = title;
         this.company_name = company_name;

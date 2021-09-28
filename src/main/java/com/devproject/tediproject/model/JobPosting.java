@@ -1,33 +1,45 @@
 package com.devproject.tediproject.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "idJobPosting")
 @Data
 @Entity
+//@JsonIgnoreProperties(value="applications")
 public class JobPosting {
 
     private @Id @GeneratedValue Long idJobPosting;
 
-    @OneToOne(cascade= CascadeType.ALL)
-    private Professional Professional_idProfessional;
+    private Timestamp date_time;
 
+    @OneToOne
+    @JoinColumn(name="prof_id")
+    private Professional professional;
 
     @OneToMany(mappedBy="jobPosting", cascade = CascadeType.ALL)
     @JsonManagedReference(value="content-jobposting")
     private List<Content> content;
 
+    @ManyToMany
+    private List<Professional> interested;
+
 
 
     public JobPosting() {  }
 
-    public JobPosting(Long idJobPosting, Professional professional_idProfessional, List<Content> content) {
-        this.idJobPosting = idJobPosting;
-        Professional_idProfessional = professional_idProfessional;
-        this.content = content;
+    public JobPosting(Professional professional) {
+        this.date_time = new Timestamp(System.currentTimeMillis());
+        this.professional = professional;
+        this.content = null;
+        this.interested = null;
     }
 
 
@@ -48,13 +60,8 @@ public class JobPosting {
         this.idJobPosting = idJobPosting;
     }
 
-    public Professional getProfessional_idProfessional() {
-        return Professional_idProfessional;
-    }
-
-    public void setProfessional_idProfessional(Professional professional_idProfessional) {
-        Professional_idProfessional = professional_idProfessional;
-    }
+    //ADDS
+    public void addNewInterested( Professional professional ) { this.interested.add(professional); }
 
 
 }

@@ -37,8 +37,8 @@ public abstract class MessageDao implements Dao<Message> {
         message.setIdMessage(messageId);
         message.setContent(content);
         message.setDate_time(date);
-        message.setProf1(prof1);
-        message.setProf2(prof2);
+//        message.setProf1(prof1);
+//        message.setProf2(prof2);
 
         messages.add(message);
     }

@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Data
@@ -14,12 +14,12 @@ import java.util.List;
 public class Post {
 
     private @GeneratedValue @Id Long idPost;
-
     private Timestamp date_time;
 
+    @NotNull
     @ManyToOne
     @JsonBackReference(value="prof-post")
-//    @JoinColumn(name = "professional_id_professional")
+    @JoinColumn(name = "professional_id")
     private Professional prof;
 
     @OneToMany(mappedBy="post", cascade = CascadeType.ALL)
@@ -38,9 +38,9 @@ public class Post {
 
     public Post() { }
 
-    public Post(Professional prof) {
+    public Post(Professional professional) {
         this.date_time = new Timestamp(System.currentTimeMillis());
-        this.prof = prof;
+        this.prof = professional;
         this.likes = null;
         this.comments = null;
     }
@@ -61,6 +61,22 @@ public class Post {
         this.date_time = date_time;
     }
 
+    public Professional getProf() {
+        return this.prof;
+    }
+
+    public void setProf(Professional prof) {
+        this.prof = prof;
+    }
+
+    public List<Content> getContent() {
+        return content;
+    }
+
+    public void setContent(List<Content> content) {
+        this.content = content;
+    }
+
     public List<Like> getLikes() {
         return likes;
     }
@@ -75,22 +91,6 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
-    }
-
-    public List<Content> getContent() {
-        return content;
-    }
-
-    public void setContent(List<Content> content) {
-        this.content = content;
-    }
-
-    public Professional getProf() {
-        return prof;
-    }
-
-    public void setProf(Professional prof) {
-        this.prof = prof;
     }
 
 

@@ -32,14 +32,14 @@ public abstract class NotificationDao implements Dao<Notification> {
     }
 
 
-    public void update(Notification notification, Long id, String text, Professional prof, Post post, ConnectionRequest request, Like like){
+    public void update(Notification notification, Long id, String text, Professional prof, Comment comment, ConnectionRequest request, Like like){
 
         notification.setIdNotification(id);
         notification.setText(text);
-        notification.setProf(prof);
-        notification.setPost(post);
-        notification.setC_request(request);
-        notification.setLike(like);
+//        notification.setProf(prof);
+//        notification.setCommentNot(comment);
+//        notification.setC_requestNot(request);
+//        notification.setLikeNot(like);
         notifications.add(notification);
 
     }
