@@ -1,6 +1,7 @@
 package com.devproject.tediproject.repository;
 
 import com.devproject.tediproject.model.Professional;
+import com.devproject.tediproject.payload.ProfessionalSignInRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,4 +25,18 @@ public class ProfessionalRepositoryCustomImpl implements ProfessionalRepositoryC
         query.setParameter(1, id);
         return query.getResultList();
     }
+
+/*    @Override
+    public Professional findProfessionalByEmailAndPassword(ProfessionalSignInRequest req) {
+        String reqEmail = req.getEmail();
+        String reqPassword = req.getPassword();
+        Query query = entityManager.createQuery(
+                "SELECT prof\n" +
+                        "FROM Professional prof\n" +
+                        "WHERE prof.email = ?1 AND prof.password = ?2 ");
+        query.setParameter(1, reqEmail);
+        query.setParameter(2, reqPassword);
+        return (Professional) query.getSingleResult();
+    }*/
+
 }
