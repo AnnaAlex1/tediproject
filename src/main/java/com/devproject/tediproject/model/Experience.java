@@ -1,9 +1,13 @@
 package com.devproject.tediproject.model;
 
+import com.devproject.tediproject.payload.ExperienceRequest;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
+import static java.lang.Long.parseLong;
+import static java.time.LocalDate.parse;
 
 
 @Data
@@ -23,12 +27,12 @@ public class Experience {
 
     public Experience() { }
 
-    public Experience(String title, LocalDate start_date, LocalDate end_date, String company_name, Professional professionalId) {
-        this.title = title;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.company_name = company_name;
-        this.professionalId = professionalId;
+    public Experience(ExperienceRequest exp) {
+        this.title = exp.getTitle();
+        this.start_date = parse(exp.getStart_date());
+        this.end_date = parse(exp.getEnd_date());
+        this.company_name = exp.getCompany_name();
+        this.professionalId.setId(exp.getProfessional_id());
     }
 
     public String getTitle() {

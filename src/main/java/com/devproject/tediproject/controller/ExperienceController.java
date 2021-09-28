@@ -2,6 +2,7 @@ package com.devproject.tediproject.controller;
 
 import com.devproject.tediproject.model.Experience;
 import com.devproject.tediproject.model.ExperienceId;
+import com.devproject.tediproject.payload.ExperienceRequest;
 import com.devproject.tediproject.repository.ExperienceRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,15 @@ public class ExperienceController {
         this.repository = repository;
     }
 
-    @PostMapping("/professionals/{id}/experiences/add")
+/*    @PostMapping("/professionals/{id}/experiences/add")
     Experience newExperience(@RequestBody Experience newExperience, @PathVariable Long id) {
+        return repository.save(newExperience);
+    }*/
+
+//    @PostMapping("/professionals/{id}/experiences/add")
+    @PostMapping("/experiences/add")
+    Experience newExperience(@RequestBody ExperienceRequest addExperience) {
+        Experience newExperience = new Experience(addExperience);
         return repository.save(newExperience);
     }
 
