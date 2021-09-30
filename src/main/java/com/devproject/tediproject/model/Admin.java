@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 @Data
@@ -16,6 +17,7 @@ public class Admin {
     private String username;
     @NotBlank
     private String password;
+
 
     public Admin() {}
     public Admin(Long id, String username, String password) {

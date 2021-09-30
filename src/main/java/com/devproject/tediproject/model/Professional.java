@@ -33,6 +33,8 @@ public class Professional {
     private String work_position;
     private String work_place;
 
+
+
     @JsonManagedReference(value="prof-not")
     @OneToMany(cascade = CascadeType.ALL)
     List<Notification> userNotifications;
@@ -199,6 +201,7 @@ public class Professional {
 //        this.messageList = messageList;
 //    }
 
+
     public List<Post> getPostList() {
         return postList;
     }
@@ -229,5 +232,6 @@ public class Professional {
     public void addNewApplication( JobPosting jobPosting ) { this.applications.add(jobPosting); }
 
     public void removePost(Post post) { this.postList.remove(post);}
+
 
 }
