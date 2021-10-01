@@ -1,46 +1,57 @@
 package com.devproject.tediproject.model;
 
+import com.devproject.tediproject.payload.EducationRequest;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+import static java.time.LocalDate.parse;
+
 @Data
 @Entity
-@IdClass(EducationId.class)
+//@IdClass(EducationId.class)
 public class Education {
 
-    @Id private String title;
+    @EmbeddedId
+    private EducationId edId;
+//    @Id private String title;
+
     private String type;
     private float grade;
     private LocalDate date;
-    @Id private String institution_name;
+//    @Id private String institution_name;
 
-    @Id
-    @ManyToOne
-    private Professional professionalId;
+//    @Id
+//    @ManyToOne
+//    private Professional professionalId;
 
 
     public Education() { }
 
-    public Education(String title, String type, float grade, LocalDate date, String institution_name, Professional professionalId) {
+/*    public Education(String title, String type, float grade, LocalDate date, String institution_name, Professional professionalId) {
         this.title = title;
         this.type = type;
         this.grade = grade;
         this.date = date;
         this.institution_name = institution_name;
         this.professionalId = professionalId;
+    }*/
+
+    public Education(EducationRequest req, Professional prof) {
+        this.edId = new EducationId(req.getTitle(),req.getInstitution_name(),prof);
+//        this.edId.setTitle(req.getTitle());
+        this.type = req.getType();
+        this.grade = req.getGrade();
+        this.date = parse(req.getDate());
+//        this.edId.setInstitution_name(req.getInstitution_name());
+//        this.edId.setProfessionalId(prof);
+
     }
 
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getType() {
         return type;
@@ -66,20 +77,11 @@ public class Education {
         this.date = date;
     }
 
-
-    public String getInstitution_name() {
-        return institution_name;
+    public EducationId getEdId() {
+        return edId;
     }
 
-    public void setInstitution_name(String institution_name) {
-        this.institution_name = institution_name;
-    }
-
-    public Professional getProfessionalId() {
-        return professionalId;
-    }
-
-    public void setProfessionalId(Professional professionalId) {
-        this.professionalId = professionalId;
+    public void setEdId(EducationId edId) {
+        this.edId = edId;
     }
 }

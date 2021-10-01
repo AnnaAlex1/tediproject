@@ -1,12 +1,15 @@
 package com.devproject.tediproject.model;
 
+import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
-
+@Embeddable
 public class ExperienceId implements Serializable {
     private String title;
     private String company_name;
+    @ManyToOne
     private Professional professionalId;
 
     public ExperienceId() { }
@@ -21,12 +24,24 @@ public class ExperienceId implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getCompany_name() {
         return company_name;
     }
 
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
     public Professional getProfessionalId() {
         return professionalId;
+    }
+
+    public void setProfessionalId(Professional professionalId) {
+        this.professionalId = professionalId;
     }
 
     @Override

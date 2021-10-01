@@ -57,7 +57,7 @@ public class ProfessionalController {
     Professional get_one(@RequestBody ProfessionalSignInRequest newSignInRequest){
         Professional prof = repository.findProfessionalByEmailAndPassword(newSignInRequest.getEmail(),newSignInRequest.getPassword());
         if (prof!=null) {
-            prof.setMessageList(null);
+//            prof.setMessageList(null);
             prof.setPostList(null);
             return prof;
         }
@@ -107,7 +107,7 @@ public class ProfessionalController {
 
                     repository.save(professional);
 
-                    professional.setMessageList(null);
+//                    professional.setMessageList(null);
                     professional.setPostList(null);
 
                     return professional;

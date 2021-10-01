@@ -31,12 +31,9 @@ public class EducationDao implements Dao<Education>{
 
     @Override
     public void update(Education education_rec, String[] params){
-        education_rec.setTitle(Objects.requireNonNull(
-                params[0], "Title cannot be null"));
         education_rec.setType(Objects.requireNonNull(params[1], "Type cannot be null"));
         education_rec.setGrade(Float.parseFloat(params[2]));
         education_rec.setDate(LocalDate.parse(params[3]));
-        education_rec.setInstitution_name(Objects.requireNonNull(params[4], "Institution name cannot be null"));
         education_recs.add(education_rec);
     }
 

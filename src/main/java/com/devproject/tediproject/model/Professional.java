@@ -8,6 +8,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -80,6 +81,7 @@ public class Professional {
 //        this.messageList = null;
         this.postList = null;
         this.applications = null;
+        this.userNotifications = null;
     }
 
     public Long getId() {

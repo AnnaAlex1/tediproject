@@ -2,26 +2,72 @@ package com.devproject.tediproject.controller;
 
 import com.devproject.tediproject.model.Education;
 import com.devproject.tediproject.model.EducationId;
+import com.devproject.tediproject.model.Professional;
+import com.devproject.tediproject.payload.EducationRequest;
 import com.devproject.tediproject.repository.EducationRepository;
+import com.devproject.tediproject.repository.ProfessionalRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
 public class EducationController {
 
+    @Autowired
+    private ProfessionalRepository profRepository;
+
     private final EducationRepository repository;
 
-    public EducationController(EducationRepository repository) {
+    public EducationController(EducationRepository repository, ProfessionalRepository profRepository) {
         this.repository = repository;
+        this.profRepository = profRepository;
     }
 
-    @PostMapping("/professionals/{id}/education/add")
-    Education newExperience(@RequestBody Education newEducation, @PathVariable Long id) { return repository.save(newEducation); }
 
+
+    /*@PostMapping("/professionals/{id}/education/add")
+    Education newExperience(@RequestBody Education newEducation, @PathVariable Long id) { return repository.save(newEducation); }*/
+
+    @PostMapping("/professionals/{id}/education/add")
+    Education newEducation(@RequestBody EducationRequest newEducationReq, @PathVariable Long id) {
+
+        //get professional
+        Optional<Professional> res = profRepository.findById(id);
+        Professional prof = res.get();
+        if (prof!=null) {
+            prof.setPostList(null);
+            prof.setUserNotifications(null);
+            prof.setApplications(null);
+        }
+
+        Education addEducation =  new Education(newEducationReq,prof);
+        return repository.save(addEducation);
+
+    }
+
+//    @GetMapping("/professionals/{id}/education")
+//    List<Education> get_All(@PathVariable Long id){ return  repository.findByProfessionalId(id); }
+
+//    @Transactional
     @GetMapping("/professionals/{id}/education")
-    List<Education> get_All(@PathVariable Long id){ return  repository.findByProfessionalId(id); }
+    List<Education> get_All(@PathVariable Long id){
+        return repository.getAllEducations(id);
+/*        //get professional
+        Optional<Professional> res = profRepository.findById(id);
+        Professional prof = res.get();
+        if (prof!=null) {
+            prof.setPostList(null);
+            prof.setUserNotifications(null);
+            prof.setApplications(null);
+        }
+
+//        return repository.findDistinctByEdId_ProfessionalId_Id(id);
+        return  repository.findByEdId_ProfessionalId(prof);*/
+    }
 
     @PutMapping("/professionals/{id}/education/{id2}")
     Education replaceEducation(@RequestBody Education newEducation, @PathVariable Long id, @PathVariable EducationId id2){
@@ -29,17 +75,11 @@ public class EducationController {
         return repository.findById(id2)
                 .map(education -> {
                     education.setType(newEducation.getType());
-                    education.setTitle(newEducation.getTitle());
-                    education.setInstitution_name(newEducation.getInstitution_name());
                     education.setGrade(newEducation.getGrade());
                     education.setDate(newEducation.getDate());
-                    education.setProfessionalId(newEducation.getProfessionalId());
                     return repository.save(education);
                 })
                 .orElseGet(() -> {
-                    newEducation.setTitle(id2.getTitle());
-                    newEducation.setInstitution_name(id2.getInstitution_name());
-                    newEducation.setProfessionalId(id2.getProfessionalId());
                     return repository.save(newEducation);
                 });
     }

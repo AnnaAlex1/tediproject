@@ -12,35 +12,37 @@ import static java.time.LocalDate.parse;
 
 @Data
 @Entity
-@IdClass(ExperienceId.class)
+//@IdClass(ExperienceId.class)
 public class Experience {
 
-    @Id private String title;
+    @EmbeddedId
+    private ExperienceId expId;
+
+//    @Id private String title;
     private LocalDate start_date;
     private LocalDate end_date;
-    @Id private String company_name;
-
-    @Id
-    @ManyToOne
-    private Professional professionalId;
+//    @Id private String company_name;
+//
+//    @Id
+//    @ManyToOne
+//    private Professional professionalId;
 
 
     public Experience() { }
 
-    public Experience(ExperienceRequest exp) {
-        this.title = exp.getTitle();
+    public Experience(ExperienceRequest exp, Professional prof) {
+        this.expId = new ExperienceId(exp.getTitle(),exp.getCompany_name(),prof);
         this.start_date = parse(exp.getStart_date());
         this.end_date = parse(exp.getEnd_date());
-        this.company_name = exp.getCompany_name();
-        this.professionalId.setId(exp.getProfessional_id());
+
     }
 
-    public String getTitle() {
-        return title;
+    public ExperienceId getExpId() {
+        return expId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setExpId(ExperienceId expId) {
+        this.expId = expId;
     }
 
     public LocalDate getStart_date() {
@@ -59,19 +61,5 @@ public class Experience {
         this.end_date = end_date;
     }
 
-    public String getCompany_name() {
-        return company_name;
-    }
 
-    public void setCompany_name(String company_name) {
-        this.company_name = company_name;
-    }
-
-    public Professional getProfessionalId() {
-        return professionalId;
-    }
-
-    public void setProfessionalId(Professional professionalId) {
-        this.professionalId = professionalId;
-    }
 }

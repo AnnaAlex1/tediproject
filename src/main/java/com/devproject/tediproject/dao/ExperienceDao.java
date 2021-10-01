@@ -34,9 +34,9 @@ public class ExperienceDao implements Dao<Experience>{
 
     @Override
     public void update(Experience experience_rec, String[] params){
-        experience_rec.setTitle(Objects.requireNonNull(
-                params[0], "Title cannot be null"));
-        experience_rec.setCompany_name(Objects.requireNonNull(params[1], "Company Name cannot be null"));
+//        experience_rec.setTitle(Objects.requireNonNull(
+//                params[0], "Title cannot be null"));
+//        experience_rec.setCompany_name(Objects.requireNonNull(params[1], "Company Name cannot be null"));
         experience_rec.setStart_date(LocalDate.parse(params[2]));
         experience_rec.setEnd_date(LocalDate.parse(params[3]));
         experience_recs.add(experience_rec);
