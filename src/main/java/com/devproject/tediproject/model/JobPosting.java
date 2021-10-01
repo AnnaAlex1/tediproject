@@ -17,8 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 public class JobPosting {
 
     private @Id @GeneratedValue Long idJobPosting;
-
     private Timestamp date_time;
+
 
     @OneToOne
     @JoinColumn(name="prof_id")

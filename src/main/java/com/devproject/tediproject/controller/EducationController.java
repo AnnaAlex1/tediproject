@@ -56,17 +56,6 @@ public class EducationController {
     @GetMapping("/professionals/{id}/education")
     List<Education> get_All(@PathVariable Long id){
         return repository.getAllEducations(id);
-/*        //get professional
-        Optional<Professional> res = profRepository.findById(id);
-        Professional prof = res.get();
-        if (prof!=null) {
-            prof.setPostList(null);
-            prof.setUserNotifications(null);
-            prof.setApplications(null);
-        }
-
-//        return repository.findDistinctByEdId_ProfessionalId_Id(id);
-        return  repository.findByEdId_ProfessionalId(prof);*/
     }
 
     @PutMapping("/professionals/{id}/education/{id2}")

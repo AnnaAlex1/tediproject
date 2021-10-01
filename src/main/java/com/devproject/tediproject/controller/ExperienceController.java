@@ -45,10 +45,10 @@ public class ExperienceController {
         return repository.save(newExperience);
     }
 
-/*    @GetMapping("/professionals/{id}/experiences")
+    @GetMapping("/professionals/{id}/experiences")
     List<Experience> get_All(@PathVariable Long id) {
-        return repository.findByProfessionalId(id);
-    }*/
+        return repository.getAllExperience(id);
+    }
 
 
     @PutMapping("/professionals/{id}/experiences/{id2}")

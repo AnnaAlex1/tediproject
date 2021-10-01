@@ -25,11 +25,11 @@ class LoadDatabase {
     CommandLineRunner initDatabase(AdminRepository repository, UserRepository userRepository) {
         return args -> {
 
-//            String username = "admin3"; String password =  passwordEncoder.encode("adminpass");
-//            Admin admin = new Admin(username, password);
-//
-//            log.info("Preloading " + repository.save(admin));
-//            userRepository.save(new User(username, password, admin));
+            String username = "admin"; String password =  passwordEncoder.encode("adminpass");
+            Admin admin = new Admin(username, password);
+
+            log.info("Preloading " + repository.save(admin));
+            userRepository.save(new User(username, password, admin));
 
         };
     }

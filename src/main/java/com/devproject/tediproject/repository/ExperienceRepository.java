@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ExperienceRepository extends JpaRepository<Experience, ExperienceId> {
+public interface ExperienceRepository extends JpaRepository<Experience, ExperienceId>, ExperienceRepositoryCustom {
 //    public List<Experience> findByProfessionalId(Long professionalId);
 }

@@ -34,12 +34,13 @@ public class JobPostingRepositoryCustomImpl implements JobPostingRepositoryCusto
 
     @Override
     public List<JobPosting> getJobPostingsByNonFriends(Long profId){
+
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT(jp)\n" +
-                        "FROM JobPosting jp,  Professional friend, ConnectionRequest cr\n" +
-                        "WHERE (jp.professional.id = friend.id AND \n" +
-                        " friend.id = cr.idFromTo.to.id AND cr.idFromTo.from.id=?1 AND cr.fromIsFollowingTo=true)\n" +
-                        "ORDER BY jp.date_time DESC"
+                "SELECT jp FROM JobPosting jp\n" +
+                        "WHERE jp.professional.id NOT IN (SELECT friend FROM ConnectionRequest cr, Professional friend\n" +
+                        "WHERE ((cr.idFromTo.to.id = ?1 AND cr.idFromTo.from.id = friend.id AND cr.toIsFollowingFrom = true)\n" +
+                        "OR (cr.idFromTo.from.id = ?1 AND cr.idFromTo.to.id = friend.id AND cr.fromIsFollowingTo = true) \n" +
+                        "OR friend.id = ?1))"
         );
         query.setParameter(1, profId);
         return query.getResultList();
