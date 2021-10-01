@@ -3,7 +3,6 @@ package com.devproject.tediproject.controller;
 
 import com.devproject.tediproject.model.Content;
 import com.devproject.tediproject.model.JobPosting;
-import com.devproject.tediproject.model.Post;
 import com.devproject.tediproject.model.Professional;
 import com.devproject.tediproject.payload.JobPostingAddRequest;
 import com.devproject.tediproject.repository.ContentRepository;

@@ -6,7 +6,6 @@ import com.devproject.tediproject.repository.LikeRepository;
 import com.devproject.tediproject.repository.NotificationRepository;
 import com.devproject.tediproject.repository.PostRepository;
 import com.devproject.tediproject.repository.ProfessionalRepository;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

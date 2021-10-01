@@ -1,6 +1,5 @@
 package com.devproject.tediproject.controller;
 
-import com.devproject.tediproject.exception.CommentNotFoundException;
 import com.devproject.tediproject.model.*;
 import com.devproject.tediproject.payload.CommentAddRequest;
 import com.devproject.tediproject.repository.*;

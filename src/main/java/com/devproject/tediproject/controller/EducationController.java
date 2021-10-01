@@ -7,7 +7,6 @@ import com.devproject.tediproject.payload.EducationRequest;
 import com.devproject.tediproject.repository.EducationRepository;
 import com.devproject.tediproject.repository.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
