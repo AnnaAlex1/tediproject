@@ -2,9 +2,7 @@ package com.devproject.tediproject.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Data
@@ -13,13 +11,14 @@ public class Admin {
 
     private @Id @GeneratedValue Long id;
     @NotBlank
+    @Column(unique = true)
     private String username;
     @NotBlank
     private String password;
 
+
     public Admin() {}
-    public Admin(Long id, String username, String password) {
-        this.id = id;
+    public Admin(String username, String password) {
         this.username = username;
         this.password = password;
     }

@@ -44,7 +44,7 @@ public class ConnectionRequest {
         this.toIsFollowingFrom = false;
     }
 
-    public boolean isFromIsFollowingTo() {
+    public boolean getFromIsFollowingTo() {
         return fromIsFollowingTo;
     }
 
@@ -52,13 +52,11 @@ public class ConnectionRequest {
         this.fromIsFollowingTo = fromIsFollowingTo;
     }
 
-    public boolean isToIsFollowingFrom() {
+    public boolean getToIsFollowingFrom() {
         return toIsFollowingFrom;
     }
 
     public void setToIsFollowingFrom(boolean toIsFollowingFrom) {
         this.toIsFollowingFrom = toIsFollowingFrom;
     }
-
-
 }

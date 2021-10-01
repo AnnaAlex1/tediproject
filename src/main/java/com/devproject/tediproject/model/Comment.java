@@ -14,12 +14,10 @@ public class Comment {
 
     private @Id @GeneratedValue Long idComment;
 
-    @NotBlank
     @OneToOne
     @JoinColumn(name="professional_id_id")
     private Professional professionalId;
 
-    @NotBlank
     @ManyToOne
     @JsonBackReference(value="comment-post")
     @JoinColumn(name="post_id_id_post")

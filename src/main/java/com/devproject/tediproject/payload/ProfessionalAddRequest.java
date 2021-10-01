@@ -2,6 +2,7 @@ package com.devproject.tediproject.payload;
 
 public class ProfessionalAddRequest {
 
+
     String username;
     String password;
     String name;

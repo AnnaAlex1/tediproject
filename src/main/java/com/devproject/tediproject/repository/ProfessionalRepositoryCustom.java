@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface ProfessionalRepositoryCustom {
     public List<Professional> getFollowing(Long id);
+    public List<Professional> getAllExceptFriends(Long id);
 //    public Professional findProfessionalByEmailAndPassword(ProfessionalSignInRequest req);
+    public Professional findByUsername(String username);
 }

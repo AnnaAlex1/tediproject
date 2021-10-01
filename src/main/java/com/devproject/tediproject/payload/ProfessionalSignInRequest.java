@@ -5,6 +5,7 @@ public class ProfessionalSignInRequest {
     String email;
     String password;
 
+
     public String getEmail() {
         return email;
     }

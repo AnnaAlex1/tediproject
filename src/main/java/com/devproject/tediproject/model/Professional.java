@@ -34,6 +34,8 @@ public class Professional {
     private String work_position;
     private String work_place;
 
+
+
     @JsonManagedReference(value="prof-not")
     @OneToMany(cascade = CascadeType.ALL)
     List<Notification> userNotifications;
@@ -73,6 +75,7 @@ public class Professional {
         this.email = prof.getEmail();
         this.phone = prof.getPhone();
         this.picture_url = prof.getPicture_url();
+        if (this.picture_url == null) this.picture_url = "https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png";
         this.name_surname_public = true;
         this.email_public = true;
         this.phone_public = true;
@@ -201,6 +204,7 @@ public class Professional {
 //        this.messageList = messageList;
 //    }
 
+
     public List<Post> getPostList() {
         return postList;
     }
@@ -231,5 +235,6 @@ public class Professional {
     public void addNewApplication( JobPosting jobPosting ) { this.applications.add(jobPosting); }
 
     public void removePost(Post post) { this.postList.remove(post);}
+
 
 }
