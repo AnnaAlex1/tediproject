@@ -72,11 +72,7 @@ public class CommentController {
     @GetMapping("/comments")
     List<Comment> get_All() { return repository.findAll(); }
 
-//    @GetMapping("comments/{id}")
-//    Comment get_one(@PathVariable Long id){
-//        return repository.findById(id)
-//                .orElseThrow(() -> new CommentNotFoundException(id));
-//    }
+
 
     @GetMapping("comments/{postId}")
     List<Comment> getCommentsOfPost(@PathVariable Long postId){

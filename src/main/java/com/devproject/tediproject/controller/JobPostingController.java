@@ -58,10 +58,6 @@ public class JobPostingController {
         newJobPosting.setContent(newContent); //set content of new post
         repository.save(newJobPosting); //add post in database
 
-//        //for professional
-//        prof.addNewPost(newJobPosting); //add post to professional class
-//        profRepository.save(prof); //update professional
-
         //add content to array of contents
         for (int i=0; i<newContent.size(); i++) {
             contentRepository.save(newContent.get(i));

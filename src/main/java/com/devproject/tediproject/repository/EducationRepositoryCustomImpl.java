@@ -29,20 +29,5 @@ public class EducationRepositoryCustomImpl implements EducationRepositoryCustom 
         return query.getResultList();
     }
 
-//    @Override
-//    public  List<Education> getAllEducations(Long profId) {
-//
-//        List<Education> dbWeapons = new ArrayList<>();
-//        /*EntityTransaction entr= entityManager.getTransaction();
-//        entr.begin();*/
-////        TypedQuery<Education> query = entityManager.createQuery("SELECT i FROM Education i", Education.class);
-//        TypedQuery<Education> query = entityManager.createQuery("SELECT i FROM Education i where " +
-//                "i.edId.professionalId.id = :professional_id_id", Education.class);
-//        query.setParameter("professional_id_id", profId);
-//        dbWeapons = query.getResultList();
-////        entityManager.getTransaction().commit();
-//
-//        return dbWeapons;
-//    }
 
 }

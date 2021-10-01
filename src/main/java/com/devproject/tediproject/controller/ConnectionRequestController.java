@@ -45,8 +45,7 @@ public class ConnectionRequestController {
         Professional profTo = res2.get();
 
         ConnectionRequestId newConnectionRequestId = new ConnectionRequestId(profFrom, profTo);
-//        ConnectionRequest newConnectionRequest =
-//                new ConnectionRequest(profFrom, profTo);
+
 
         ConnectionRequest newConnectionRequest = new ConnectionRequest(newConnectionRequestId);
 

@@ -27,11 +27,6 @@ public class EducationController {
         this.profRepository = profRepository;
     }
 
-
-
-    /*@PostMapping("/professionals/{id}/education/add")
-    Education newExperience(@RequestBody Education newEducation, @PathVariable Long id) { return repository.save(newEducation); }*/
-
     @PostMapping("/professionals/{id}/education/add")
     Education newEducation(@RequestBody EducationRequest newEducationReq, @PathVariable Long id) {
 
@@ -49,10 +44,7 @@ public class EducationController {
 
     }
 
-//    @GetMapping("/professionals/{id}/education")
-//    List<Education> get_All(@PathVariable Long id){ return  repository.findByProfessionalId(id); }
 
-//    @Transactional
     @GetMapping("/professionals/{id}/education")
     List<Education> get_All(@PathVariable Long id){
         return repository.getAllEducations(id);

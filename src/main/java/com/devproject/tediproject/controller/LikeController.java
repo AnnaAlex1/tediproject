@@ -57,9 +57,6 @@ public class LikeController {
     List<Like> getLikeByPostId(@PathVariable Long postId) { return repository.findByPostIdPost(postId); }
 
 
-//    @GetMapping("/post/{postId}/likes")
-//    List<Like> get_All() { return repository.findAll(); }
-
     @DeleteMapping("/post/{postId}/{likeId}")
     void deleteLike(@PathVariable Long likeId) { repository.deleteById(likeId); }
 

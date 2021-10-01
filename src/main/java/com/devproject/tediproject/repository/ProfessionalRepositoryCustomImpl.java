@@ -55,18 +55,4 @@ public class ProfessionalRepositoryCustomImpl implements ProfessionalRepositoryC
 
 
 
-
-/*    @Override
-    public Professional findProfessionalByEmailAndPassword(ProfessionalSignInRequest req) {
-        String reqEmail = req.getEmail();
-        String reqPassword = req.getPassword();
-        Query query = entityManager.createQuery(
-                "SELECT prof\n" +
-                        "FROM Professional prof\n" +
-                        "WHERE prof.email = ?1 AND prof.password = ?2 ");
-        query.setParameter(1, reqEmail);
-        query.setParameter(2, reqPassword);
-        return (Professional) query.getSingleResult();
-    }*/
-
 }

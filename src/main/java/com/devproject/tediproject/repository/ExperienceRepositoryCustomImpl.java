@@ -1,6 +1,5 @@
 package com.devproject.tediproject.repository;
 
-import com.devproject.tediproject.model.Education;
 import com.devproject.tediproject.model.Experience;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
