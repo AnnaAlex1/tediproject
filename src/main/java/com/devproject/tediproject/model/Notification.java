@@ -66,16 +66,27 @@ public class Notification {
 //        this.likeNot = null;
 //    }
 //
-//    public Notification(String text,  Timestamp date_time, Like like) {
-//        this.text = text;
-//        this.was_read = false;
-//        this.date_time1 = date_time;
-//        this.prof = null;
-//        this.commentNot = null;
-//        this.c_requestNot = null;
-//        this.likeNot = like;
-//    }
-//
+    public Notification(String text, Like like, Professional prof) {
+        this.text = text;
+        this.wasRead = false;
+        this.dateTime = new Timestamp(System.currentTimeMillis());;
+        this.profId = prof;
+        this.commentNot = null;
+        this.cRequestNot = null;
+        this.likeNot = like;
+    }
+
+    public Notification(String text, Comment comment, Professional prof) {
+        this.text = text;
+        this.wasRead = false;
+        this.dateTime = new Timestamp(System.currentTimeMillis());;
+        this.profId = prof;
+        this.commentNot = comment;
+        this.cRequestNot = null;
+        this.likeNot = null;
+    }
+
+
 
     public Long getIdNotification() {
         return idNotification;

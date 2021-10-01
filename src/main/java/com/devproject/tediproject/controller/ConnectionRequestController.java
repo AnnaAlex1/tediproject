@@ -8,6 +8,8 @@ import com.devproject.tediproject.payload.ConnectionAddRequest;
 import com.devproject.tediproject.repository.ConnectionRequestRepository;
 import com.devproject.tediproject.repository.ConversationsRepository;
 import com.devproject.tediproject.repository.ProfessionalRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,20 +51,27 @@ public class ConnectionRequestController {
         ConnectionRequest newConnectionRequest = new ConnectionRequest(newConnectionRequestId);
 
 
-        // create a new conversation
-        Conversations newConversation = new Conversations(profTo, profFrom);
-        conversationsRepository.save(newConversation);
-
         return repository.save(newConnectionRequest);
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 
+
+    @CrossOrigin(origins = "*")
     @PutMapping("/connectionrequests/update")
     ConnectionRequest updateConnectionRequest(@RequestBody ConnectionRequest updConnectionRequest){
         Optional<ConnectionRequest> res = repository.findById(updConnectionRequest.getIdFromTo());
         ConnectionRequest oldConnectionRequest = res.get();
 
-        oldConnectionRequest.setFromIsFollowingTo(true);
+
+        oldConnectionRequest.setFromIsFollowingTo(updConnectionRequest.getFromIsFollowingTo());
+        oldConnectionRequest.setToIsFollowingFrom(updConnectionRequest.getToIsFollowingFrom());
+
+        logger.info("FromTo " + oldConnectionRequest.getFromIsFollowingTo() + " To: " + oldConnectionRequest.getToIsFollowingFrom());
+        // create a new conversation
+        Conversations newConversation = new Conversations(res.get().getIdFromTo().getTo(), res.get().getIdFromTo().getFrom());
+        conversationsRepository.save(newConversation);
+
         return repository.save(oldConnectionRequest);
     }
 

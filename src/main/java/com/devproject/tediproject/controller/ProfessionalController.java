@@ -97,6 +97,10 @@ public class ProfessionalController {
     @GetMapping("/professionals/{id}/following")
     List<Professional> getFollowing(@PathVariable Long id){ return repository.getFollowing(id);}
 
+    @GetMapping("/professionals/{id}/nonfollowing")
+    List<Professional> getNonFollowing(@PathVariable Long id){ return repository.getAllExceptFriends(id);}
+
+
     @GetMapping("/professionals/{id}")
     Professional get_one(@PathVariable Long id){
         return repository.findById(id)

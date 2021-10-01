@@ -1,11 +1,9 @@
 package com.devproject.tediproject.controller;
 
-import com.devproject.tediproject.model.Education;
-import com.devproject.tediproject.model.Like;
-import com.devproject.tediproject.model.Post;
-import com.devproject.tediproject.model.Professional;
+import com.devproject.tediproject.model.*;
 import com.devproject.tediproject.payload.LikeAddRequest;
 import com.devproject.tediproject.repository.LikeRepository;
+import com.devproject.tediproject.repository.NotificationRepository;
 import com.devproject.tediproject.repository.PostRepository;
 import com.devproject.tediproject.repository.ProfessionalRepository;
 import javafx.geometry.Pos;
@@ -22,21 +20,32 @@ public class LikeController {
     private ProfessionalRepository profRepository;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private NotificationRepository notificationRepository;
 
-    LikeController(LikeRepository repository) {
+    public LikeController(LikeRepository repository, ProfessionalRepository profRepository, PostRepository postRepository, NotificationRepository notificationRepository) {
         this.repository = repository;
+        this.profRepository = profRepository;
+        this.postRepository = postRepository;
+        this.notificationRepository = notificationRepository;
     }
 
     @PostMapping("/post/like/add")
     Like newLike(@RequestBody LikeAddRequest newLikeRequest) {
+        //find professional who "likes"
         Optional<Professional> res = profRepository.findById(newLikeRequest.getProfessionalId());
         Professional professional = res.get();
 
+        //find the post
         Optional<Post> res2 = postRepository.findById((newLikeRequest.getPostId()));
         Post post = res2.get();
 
         Like newLike = new Like(post, professional);
         post.addNewLike(newLike);
+
+        String message = "Professional " + professional.getUsername() + " liked yout post";
+        Notification newNot = new Notification(message, newLike , post.getProf());
+        notificationRepository.save(newNot);
 
         repository.save(newLike);
         postRepository.save(post);

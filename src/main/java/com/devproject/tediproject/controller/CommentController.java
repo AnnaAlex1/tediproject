@@ -1,15 +1,9 @@
 package com.devproject.tediproject.controller;
 
 import com.devproject.tediproject.exception.CommentNotFoundException;
-import com.devproject.tediproject.model.Comment;
-import com.devproject.tediproject.model.Content;
-import com.devproject.tediproject.model.Post;
-import com.devproject.tediproject.model.Professional;
+import com.devproject.tediproject.model.*;
 import com.devproject.tediproject.payload.CommentAddRequest;
-import com.devproject.tediproject.repository.CommentRepository;
-import com.devproject.tediproject.repository.ContentRepository;
-import com.devproject.tediproject.repository.PostRepository;
-import com.devproject.tediproject.repository.ProfessionalRepository;
+import com.devproject.tediproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +21,8 @@ public class CommentController {
     private PostRepository postRepository;
     @Autowired
     private ContentRepository contentRepository;
+    @Autowired
+    private NotificationRepository notificationRepository;
 
     CommentController(CommentRepository repository) {
         this.repository = repository;
@@ -65,6 +61,10 @@ public class CommentController {
             contentRepository.save(newContent.get(i));
         }
         postRepository.save(post);      //update post in database
+
+        String message = "Professional " + prof.getUsername() + " commented on your post";
+        Notification newNot = new Notification(message, newComment , post.getProf());
+        notificationRepository.save(newNot);
 
         return repository.save(newComment);
     }

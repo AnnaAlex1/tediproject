@@ -21,7 +21,9 @@ public class ProfessionalRepositoryCustomImpl implements ProfessionalRepositoryC
         Query query = entityManager.createQuery(
                 "SELECT fr\n" +
                         "FROM Professional pro, Professional fr, ConnectionRequest con\n" +
-                        "WHERE pro.id = con.idFromTo.from.id AND con.idFromTo.to.id = fr.id AND con.fromIsFollowingTo = true AND pro.id = ?1");
+                        "WHERE (pro.id = con.idFromTo.from.id AND con.idFromTo.to.id = fr.id AND con.fromIsFollowingTo = true AND pro.id = ?1) \n" +
+                        "OR (pro.id = con.idFromTo.to.id AND con.idFromTo.from.id = fr.id AND con.toIsFollowingFrom = true AND pro.id = ?1)"
+                );
         query.setParameter(1, id);
         return query.getResultList();
     }
@@ -36,6 +38,23 @@ public class ProfessionalRepositoryCustomImpl implements ProfessionalRepositoryC
             user = users.get(0);
         return user;
     }
+
+    @Override
+    public List<Professional> getAllExceptFriends(Long id){
+
+        Query query = entityManager.createQuery(
+                "SELECT users FROM Professional users\n" +
+                        "WHERE users.id NOT IN (SELECT friend FROM ConnectionRequest cr, Professional friend\n" +
+                        "WHERE ((cr.idFromTo.to.id = ?1 AND cr.idFromTo.from.id = friend.id AND cr.toIsFollowingFrom = true)\n" +
+                        "OR (cr.idFromTo.from.id = ?1 AND cr.idFromTo.to.id = friend.id AND cr.fromIsFollowingTo = true) \n" +
+                        "OR friend.id = ?1))"
+        );
+        query.setParameter(1, id);
+        return query.getResultList();
+    }
+
+
+
 
 /*    @Override
     public Professional findProfessionalByEmailAndPassword(ProfessionalSignInRequest req) {

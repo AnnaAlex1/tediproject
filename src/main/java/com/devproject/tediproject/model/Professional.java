@@ -74,6 +74,7 @@ public class Professional {
         this.email = prof.getEmail();
         this.phone = prof.getPhone();
         this.picture_url = prof.getPicture_url();
+        if (this.picture_url == null) this.picture_url = "https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png";
         this.name_surname_public = true;
         this.email_public = true;
         this.phone_public = true;
