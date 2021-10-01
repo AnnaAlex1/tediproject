@@ -57,7 +57,6 @@ public class ConnectionRequestController {
     private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 
 
-    @CrossOrigin(origins = "*")
     @PutMapping("/connectionrequests/update")
     ConnectionRequest updateConnectionRequest(@RequestBody ConnectionRequest updConnectionRequest){
         Optional<ConnectionRequest> res = repository.findById(updConnectionRequest.getIdFromTo());
